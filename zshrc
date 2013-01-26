@@ -40,7 +40,7 @@ setopt cdablevars
 # try to correct command line spelling
 setopt CORRECT CORRECT_ALL
 
-# resolve symlinks to true values when changing directory
+# resolve symlinks 
 setopt CHASE_LINKS
 
 # enable extended globbing
@@ -59,8 +59,12 @@ autoload -U promptinit && promptinit
 setopt prompt_subst
 
 # prompt
-export PS1="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}
--\$ "
+PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}
+ "
+case `id -u` in 
+  0) PS1="${PROMPT}# ";; # root
+  *) PS1="${PROMPT}> ";; # mortals
+esac
 
 # awesome rprompt by Ian McKellar
 function __git_prompt {

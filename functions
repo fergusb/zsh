@@ -27,6 +27,11 @@ function extract() {
   fi
 }
 
+# creates archive from given directory
+function mktar() { tar cvf  "${1%%/}.tar"     "${1%%/}/"; }
+function mktgz() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
+function mktbz() { tar cvjf "${1%%/}.tar.bz2" "${1%%/}/"; }
+
 # find stuff; do stuff
 function ff() { find . -type f -iname '*'$*'*' ; }
 function fe() { find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \;  ; }
