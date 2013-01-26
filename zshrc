@@ -51,7 +51,7 @@ setopt prompt_subst
 
 # prompt
 export PS1="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}
-\$ "
+-\$ "
 
 # huge history
 export HISTSIZE=5000
