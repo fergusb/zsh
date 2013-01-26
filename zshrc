@@ -4,7 +4,6 @@
 # From: Fergus Bremner
 # Email: <fergus.bremner@gmail.com>
 # Last Modified: TIMESTAMP
-# test
  
 # set PATH so it includes user bin if it exists
 if [ -d ~/bin ] ; then
@@ -96,7 +95,6 @@ function __git_prompt {
 }
  
 export RPS1='$(__git_prompt)'
-
 
 # huge history
 export HISTSIZE=5000
