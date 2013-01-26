@@ -44,4 +44,11 @@ alias vi='vim'
 alias open='xdg-open'
 alias shred='shred -fvzu'
 
+# SUFFIXES
+alias -s css=vim
+alias -s html=vim
+alias -s jsp=vim
+alias -s php=vim
+alias -s txt=vim
+
 # vim:ft=zsh

@@ -3,7 +3,6 @@
 # ~/.zshrc - zsh config file
 # From: Fergus Bremner
 # Email: <fergus.bremner@gmail.com>
-# Last Modified: TIMESTAMP
  
 # set PATH so it includes user bin if it exists
 if [ -d ~/bin ] ; then
@@ -119,4 +118,3 @@ if [ -e "$HOME/.zsh/aliases" ]; then
 fi
 
 # vim:ft=zsh
-
