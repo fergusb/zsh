@@ -1,4 +1,0 @@
-zsh
-===
-
-Fergus' zsh foo
