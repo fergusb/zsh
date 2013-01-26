@@ -72,4 +72,4 @@ if [ -e "$HOME/.zsh/aliases" ]; then
   source "$HOME/.zsh/aliases"
 fi
 
-# vim:ft=sh
+# vim:ft=zsh

@@ -44,4 +44,4 @@ alias vi='vim'
 alias open='xdg-open'
 alias shred='shred -fvzu'
 
-# vim:ft=sh
+# vim:ft=zsh
