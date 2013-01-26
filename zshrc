@@ -41,6 +41,9 @@ setopt cdablevars
 # try to correct command line spelling
 setopt CORRECT CORRECT_ALL
 
+# resolve symlinks to true values when changing directory
+setopt CHASE_LINKS
+
 # enable extended globbing
 setopt EXTENDED_GLOB
 
