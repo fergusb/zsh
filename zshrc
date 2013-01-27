@@ -68,8 +68,8 @@ esac
 
 # awesome rprompt by Ian McKellar
 function __git_prompt {
-  local DIRTY="%{$fg[yellow]%}"
   local CLEAN="%{$fg[green]%}"
+  local DIRTY="%{$fg[magenta]%}"
   local UNMERGED="%{$fg[red]%}"
   local RESET="%{$terminfo[sgr0]%}"
   git rev-parse --git-dir >& /dev/null
