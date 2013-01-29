@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # handy calculator
 function calc () {
@@ -91,5 +91,4 @@ function symlink() {
   fi
 }
 
-# vim:ft=sh
-
+# vim:ft=zsh

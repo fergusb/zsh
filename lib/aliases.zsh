@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Navigation
 alias .='pwd'
 alias ..='cd ..'
