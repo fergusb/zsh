@@ -2,12 +2,21 @@
 alias .='pwd'
 alias ..='cd ..'
 
+#alias d='dirs -v | head -10'
+alias dh='dirs -v'
+
 # List options
 
 # Prevent accidental clobbering of files
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+#alias rm='rm -i'
+#alias cp='cp -i'
+#alias mv='mv -i'
+
+# corrections
+alias man='nocorrect man'
+alias mv='nocorrect mv'
+alias mysql='nocorrect mysql'
+alias mkdir='nocorrect mkdir'
 
 # Admin
 alias cdwd='cd `pwd`'
@@ -41,7 +50,9 @@ alias randline="/usr/bin/rl"
 alias tidy='tidy -config $HOME/.tidy.conf'
 alias updatedb='sudo updatedb'
 alias vi='vim'
-alias open='xdg-open'
+if [[ uname == 'Linux' ]]; then
+  alias open='xdg-open'
+fi
 alias shred='shred -fvzu'
 
 # SUFFIXES

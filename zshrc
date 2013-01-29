@@ -27,7 +27,9 @@ bindkey '^N' history-search-forward
 
 # automatically pushd
 setopt auto_pushd
-export dirstacksize=5
+export dirstacksize=10
+
+setopt HIST_IGNORE_SPACE
 
 # automatically enter directories without cd
 setopt auto_cd
@@ -36,6 +38,8 @@ setopt auto_cd
 setopt AUTOCD
 setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
 setopt cdablevars
+setopt multios
+#DIRSTACKSIZE=10
 
 # try to correct command line spelling
 setopt CORRECT CORRECT_ALL
@@ -47,7 +51,13 @@ setopt CHASE_LINKS
 setopt EXTENDED_GLOB
 
 # completion
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
+
+unsetopt menu_complete   # do not autoselect the first completion entry
+unsetopt flowcontrol
+setopt auto_menu         # show completion menu on succesive tab press
+setopt complete_in_word
+setopt always_to_end
 
 # rainbows
 autoload -U colors && colors
@@ -63,7 +73,7 @@ PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}
  "
 case `id -u` in 
   0) PS1="${PROMPT}# ";; # root
-  *) PS1="${PROMPT}> ";; # mortals
+  *) PS1="${PROMPT}%{$fg[red]%}➜ %{$reset_color%} ";; # mortals
 esac
 
 # awesome rprompt by Ian McKellar
@@ -106,10 +116,45 @@ export RPS1='$(__git_prompt)'
 export HISTSIZE=5000
 export HISTFILE="$HOME/.zsh/history"
 export SAVEHIST=$HISTSIZE
-setopt hist_ignore_all_dups
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
 setopt hist_ignore_space
+setopt hist_verify
 setopt inc_append_history
-setopt share_history
+setopt share_history # share command history data
+
+# command line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+# ls rainbow
+#export LS_COLORS
+export LSCOLORS="Gxfxcxdxbxegedabagacad"
+
+if [ "$DISABLE_LS_COLORS" != "true" ]
+then
+  # Find the option for using colors in ls, depending on the version: Linux or BSD
+  ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G'
+fi
+
+# smart urls
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
+# file rename magick
+bindkey "^[m" copy-prev-shell-word
+
+# jobs
+setopt long_list_jobs
+
+# pager
+export PAGER="less"
+export LESS="-R"
+
+export LC_CTYPE=$LANG
 
 # functions
 if [ -e "$HOME/.zsh/functions" ]; then
