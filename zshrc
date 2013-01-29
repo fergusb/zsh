@@ -43,8 +43,6 @@ bindkey "^E" end-of-line
 setopt auto_pushd
 export dirstacksize=10
 
-setopt HIST_IGNORE_SPACE
-
 # automatically enter directories without cd
 setopt auto_cd
 

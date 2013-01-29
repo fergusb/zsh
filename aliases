@@ -6,6 +6,16 @@ alias ..='cd ..'
 alias dh='dirs -v'
 
 # List options
+alias la='ls -a'                # show hidden
+alias lsa='ls -ld .*'           # show only hidden
+alias lx='ls -lXB'              # sort by ext
+alias lk='ls -lSr'              # sort by size
+alias lc='ls -lcr'              # sort by mod date
+alias lu='ls -lur'              # sort by last viewed
+alias lt='ls -ltr'              # sort by date
+alias lm='ls -al |more'         # ls with more (scrollbar)
+alias lr='ls -lR |more'         # recursive ls with more (scrollbar)
+alias lg='ls | grep '           # ls in current dir with grep
 
 # Prevent accidental clobbering of files
 #alias rm='rm -i'
@@ -14,6 +24,7 @@ alias dh='dirs -v'
 
 # corrections
 alias man='nocorrect man'
+alias mv='nocorrect cp'
 alias mv='nocorrect mv'
 alias mysql='nocorrect mysql'
 alias mkdir='nocorrect mkdir'
@@ -56,10 +67,11 @@ fi
 alias shred='shred -fvzu'
 
 # SUFFIXES
-alias -s css=vim
-alias -s html=vim
-alias -s jsp=vim
-alias -s php=vim
-alias -s txt=vim
+alias -s css=$EDITOR
+alias -s html=$BROWSER
+alias -s java=$EDITOR
+alias -s jsp=$EDITOR
+alias -s php=$EDITOR
+alias -s txt=$EDITOR
 
 # vim:ft=zsh
