@@ -11,19 +11,33 @@ fi
 
 export PATH
 
+# if you REALLY like vi
 EDITOR="vim"
 VISUAL="vim"
 bindkey -v 
-
-# add some readline keys back
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
 
 # vi style incremental search
 bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
+
+# huge history
+export HISTSIZE=5000
+export HISTFILE="$HOME/.zsh/history"
+export SAVEHIST=$HISTSIZE
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history # share command history data
+
+# add some readline keys back
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 # automatically pushd
 setopt auto_pushd
@@ -68,14 +82,6 @@ autoload -U promptinit && promptinit
 # expand functions in the prompt
 setopt prompt_subst
 
-# prompt
-PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}
- "
-case `id -u` in 
-  0) PS1="${PROMPT}# ";; # root
-  *) PS1="${PROMPT}%{$fg[red]%}➜ %{$reset_color%} ";; # mortals
-esac
-
 # awesome rprompt by Ian McKellar
 function __git_prompt {
   local CLEAN="%{$fg[green]%}"
@@ -110,20 +116,29 @@ function __git_prompt {
   fi
 }
  
-export RPS1='$(__git_prompt)'
+export PS2='$(__git_prompt)'
 
-# huge history
-export HISTSIZE=5000
-export HISTFILE="$HOME/.zsh/history"
-export SAVEHIST=$HISTSIZE
-setopt append_history
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups # ignore duplication command history list
-setopt hist_ignore_space
-setopt hist_verify
-setopt inc_append_history
-setopt share_history # share command history data
+# prompt
+PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}$PS2
+ "
+case `id -u` in 
+  0) PS1="${PROMPT}# ";; # root
+  *) PS1="${PROMPT}%{$fg[red]%}➜ %{$reset_color%} ";; # mortals
+esac
+
+# vi mode indicator
+MODE_INDICATOR="%{$fg_bold[white]%}CMD%{$reset_color%}"
+
+function zle-keymap-select zle-line-init zle-line-finish {
+  VI_MODE="${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+  zle reset-prompt
+  zle -R
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+zle -N zle-line-finish
+
+RPROMPT='${VI_MODE}'
 
 # command line
 autoload -U edit-command-line
@@ -131,6 +146,7 @@ zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
 # ls rainbow
+export CLICOLOR=1
 #export LS_COLORS
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
 
