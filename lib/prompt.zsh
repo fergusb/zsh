@@ -6,7 +6,7 @@ autoload -U promptinit && promptinit
 # expand functions in the prompt
 setopt prompt_subst
 
-# awesome rprompt by Ian McKellar
+# nice git prompt by Ian McKellar
 function __git_prompt {
   local CLEAN="%{$fg[green]%}"
   local DIRTY="%{$fg[magenta]%}"
@@ -54,7 +54,7 @@ esac
 MODE_INDICATOR="%{$fg_bold[white]%}CMD%{$reset_color%}"
 
 function zle-keymap-select zle-line-init zle-line-finish {
-  VI_MODE="${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+  VI_MODE="${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}" # only show CMD
   zle reset-prompt
   zle -R
 }
