@@ -7,7 +7,7 @@ alias ..='cd ..'
 #alias d='dirs -v | head -10'
 alias dh='dirs -v'
 
-# List options
+# list options
 alias la='ls -a'                # show hidden
 alias lsa='ls -ld .*'           # show only hidden
 alias lx='ls -lXB'              # sort by ext
@@ -19,17 +19,13 @@ alias lm='ls -al |more'         # ls with more (scrollbar)
 alias lr='ls -lR |more'         # recursive ls with more (scrollbar)
 alias lg='ls | grep '           # ls in current dir with grep
 
-# Prevent accidental clobbering of files
-#alias rm='rm -i'
-#alias cp='cp -i'
-#alias mv='mv -i'
-
 # corrections
+alias cp='nocorrect cp'
+alias git='nocorrect git'
 alias man='nocorrect man'
-alias mv='nocorrect cp'
+alias mkdir='nocorrect mkdir'
 alias mv='nocorrect mv'
 alias mysql='nocorrect mysql'
-alias mkdir='nocorrect mkdir'
 
 # Admin
 alias cdwd='cd `pwd`'
