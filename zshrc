@@ -9,6 +9,9 @@ if [ -d ~/bin ] ; then
 	PATH=~/bin:"${PATH}"
 fi
 
+export PATH=/usr/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
 export PATH
 
 # if you REALLY like vi
@@ -34,6 +37,7 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
 setopt share_history # share command history data
+unsetopt nomatch # print error for no match
 
 # add some readline keys back
 bindkey "^A" beginning-of-line
@@ -105,6 +109,10 @@ export PAGER="less"
 export LESS="-R"
 
 export LC_CTYPE=$LANG
+
+if [ -f /usr/local/share/zsh-completions ]; then
+  fpath=(/usr/local/share/zsh-completions $fpath)
+fi
 
 # load extra goodness
 for GOODIES ($HOME/.zsh/lib/*.zsh); do
