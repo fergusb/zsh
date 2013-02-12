@@ -1,8 +1,10 @@
 #!/usr/bin/env zsh
 
-#zstyle ":completion:*:descriptions" format "%B%d%b"
+zstyle ":completion:*:descriptions" format "%B%d%b"
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 if [[ uname == 'Linux' ]]; then
@@ -19,5 +21,8 @@ zstyle ':completion:*' verbose true
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
 # vim:ft=zsh
