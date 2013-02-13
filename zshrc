@@ -14,6 +14,9 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8  
+
 # if you REALLY like vi
 EDITOR="vim"
 VISUAL="vim"
