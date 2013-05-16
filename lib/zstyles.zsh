@@ -22,7 +22,7 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' squeeze-slashes false
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
 # vim:ft=zsh

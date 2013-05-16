@@ -62,6 +62,11 @@ alias vi='vim'
 if [[ uname == 'Linux' ]]; then
   alias open='xdg-open'
 fi
+if [[ uname == 'Darwin' ]]; then
+  # nuke duplicates in the Open With submenu.
+  alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
+fi
+
 alias shred='shred -fvzu'
 
 # SUFFIXES

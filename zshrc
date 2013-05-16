@@ -123,5 +123,3 @@ for GOODIES ($HOME/.zsh/lib/*.zsh); do
 done
 
 # vim:ft=zsh
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
