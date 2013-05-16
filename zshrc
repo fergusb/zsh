@@ -16,6 +16,7 @@ export PATH
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8  
+export LC_CTYPE=$LANG
 
 # if you REALLY like vi
 EDITOR="vim"
@@ -114,8 +115,6 @@ setopt long_list_jobs
 # pager
 export PAGER="less"
 export LESS="-R"
-
-export LC_CTYPE=$LANG
 
 # load extra goodness
 for GOODIES ($HOME/.zsh/lib/*.zsh); do
