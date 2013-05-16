@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ":completion:*:descriptions" format "%B%d%b"
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -10,6 +12,7 @@ zstyle ':completion:*' group-name ''
 if [[ uname == 'Linux' ]]; then
     zstyle ':completion:*' menu select=2 eval "$(dircolors -b)"
 fi
+zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
