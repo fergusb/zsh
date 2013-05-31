@@ -71,7 +71,7 @@ setopt CHASE_LINKS
 setopt EXTENDED_GLOB
 
 # completion
-if [ -f /usr/local/share/zsh-completions ]; then
+if [ -d /usr/local/share/zsh-completions ]; then
   fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
