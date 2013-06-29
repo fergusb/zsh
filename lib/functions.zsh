@@ -5,6 +5,12 @@ function calc () {
   awk "BEGIN { print $* ; }"
 }
 
+# qfind - used to quickly find files that contain a string in a directory
+qfind () {
+    find . -exec grep -l $1 {} \;
+    return 0
+}
+
 # extract depending on extension
 function extract() {
   if [ -f $1 ] ; then
