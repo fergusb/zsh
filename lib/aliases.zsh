@@ -70,6 +70,11 @@ fi
 
 alias shred='shred -fvzu'
 
+# Mutt
+#alias mutt='LOCAL_CONFIG=spool /usr/bin/mutt'
+alias mutt-apollo='LOCAL_CONFIG=apollo /usr/bin/mutt'
+alias mutt-gmail='LOCAL_CONFIG=gmail /usr/bin/mutt'
+
 # SUFFIXES
 alias -s css=$EDITOR
 alias -s html=$BROWSER
