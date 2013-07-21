@@ -18,7 +18,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8  
 export LC_CTYPE=$LANG
 
-export COLORFGBG="default;default" # for mutt
+export COLORFGBG="default;default" # for mutt & vi
 
 # if you REALLY like vi
 EDITOR="vim"
