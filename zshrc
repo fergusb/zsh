@@ -118,8 +118,10 @@ setopt long_list_jobs
 export PAGER="less"
 export LESS="-R"
 
-# keychain for *-agent
-eval $(keychain --eval --quiet)
+# keychain for gpg-agent
+if (( $+commands[keychain] )) ; then
+  eval $(keychain --eval --quiet)
+fi
 
 # load extra goodness
 for GOODIES ($HOME/.zsh/lib/*.zsh); do
