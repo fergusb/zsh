@@ -120,7 +120,7 @@ export LESS="-R"
 
 # keychain for gpg-agent
 if (( $+commands[keychain] )) ; then
-  eval $(keychain --eval --quiet)
+  eval $(keychain --eval --clear --quiet)
 fi
 
 # load extra goodness
