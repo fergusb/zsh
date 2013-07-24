@@ -120,7 +120,9 @@ export LESS="-R"
 
 # keychain for gpg-agent
 if (( $+commands[keychain] )) ; then
-  eval $(keychain --eval --clear --quiet)
+  eval $(keychain $HOME/.ssh/id_dsa --eval --quiet)
+  #eval $(keychain --eval --quiet)
+  #eval $(keychain --eval --clear --quiet)
 fi
 
 # load extra goodness
