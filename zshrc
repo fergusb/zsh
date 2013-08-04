@@ -16,8 +16,6 @@ export PATH
 
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8  
-#export LANG=de_DE.UTF-8
-#export LC_ALL=de_DE.UTF-8  
 export LC_CTYPE=$LANG
 
 export COLORFGBG="default;default" # for mutt & vi
