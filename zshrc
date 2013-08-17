@@ -6,7 +6,7 @@
  
 # set PATH so it includes user bin (if it exists)
 if [ -d $HOME/bin ] ; then
-	export PATH=$HOME/bin:$PATH
+  export PATH=$HOME/bin:$PATH
 fi
 
 export PATH=/usr/bin:$PATH
@@ -14,6 +14,7 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH
 
+# you say tomato, I say tomahto
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8  
 export LC_CTYPE=$LANG
@@ -56,7 +57,7 @@ export dirstacksize=10
 # automatically enter directories without cd
 setopt auto_cd
 
-# awesome cd movements from zshkit
+# handy cd movements from zshkit
 setopt AUTOCD
 setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
 setopt cdablevars
@@ -77,7 +78,7 @@ if [ -d $HOME/.zsh/extras/zsh-completions ]; then
   fpath=($HOME/.zsh/extras/zsh-completions/src $fpath)
 fi
 
-# load complations
+# load completions
 autoload -Uz compinit && compinit
 
 unsetopt menu_complete   # do not autoselect the first completion entry
