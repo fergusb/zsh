@@ -22,8 +22,8 @@ export LC_CTYPE=$LANG
 export COLORFGBG="default;default" # for mutt & vi
 
 # integrate vim goodness
-EDITOR="vim"
-VISUAL="vim"
+export EDITOR=vim
+export VISUAL=vim
 bindkey -v 
 
 # vi style incremental search
