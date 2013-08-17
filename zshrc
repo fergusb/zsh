@@ -120,7 +120,7 @@ if (( $+commands[keychain] )) ; then
 fi
 
 # extra completions
-if [ -d $HOME/.zsh/extras/zsh-completions ]; then
+if [ -d $HOME/.zsh/extras/zsh-completions/src ]; then
   fpath=($HOME/.zsh/extras/zsh-completions/src $fpath)
 fi
 

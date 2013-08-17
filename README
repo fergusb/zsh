@@ -22,4 +22,7 @@ cd ~/.zsh/
 git submodule foreach git pull origin master
 git submodule update
 
+Finally, to update completions, do:
+rm -f ~/.zcompdump; compinit
+
 " vim:ft=mkd
