@@ -126,6 +126,7 @@ if (( $+commands[keychain] )) ; then
 fi
 
 # load extra goodness
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 for GOODIES ($HOME/.zsh/lib/*.zsh); do
   source $GOODIES
 done
