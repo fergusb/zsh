@@ -1,6 +1,16 @@
 zsh
 ===
 
-Fergus' zsh foo
+Don't forget to:
+
+cd ~/
+ln -s .zsh/zshrc .zshrc 
+ln -s .zsh/zlogout .zlogout 
+ln -s .zsh/zshenv .zshenv 
+
+Additionally, you may need to install:
+  zsh-completions
+  zsh-syntax-highlighting
+Available through github and Homebrew
 
 " vim:ft=mkd
