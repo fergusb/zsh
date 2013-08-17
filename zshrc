@@ -121,13 +121,13 @@ if (( $+commands[keychain] )) ; then
 fi
 
 # extra completions
-if [ -d /usr/local/share/zsh-completions ]; then
-  fpath=(/usr/local/share/zsh-completions $fpath)
+if [ -d $HOME/.zsh/extras/zsh-completions ]; then
+  fpath=($HOME/.zsh/extras/zsh-completions/src $fpath)
 fi
 
 # fish shell like syntax highlighting
-if [ -d /usr/local/share/zsh-syntax-highlighting ]; then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -d $HOME/.zsh/extras/zsh-syntax-highlighting ]; then
+  source $HOME/.zsh/extras/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # load custom goodness

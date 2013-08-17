@@ -1,16 +1,24 @@
-zsh
-===
+# zsh
 
-Don't forget to:
-
-cd ~/
-ln -s .zsh/zshrc .zshrc 
+## installation
+cd [or] cd ~/
+git clone git://github.com/fergusb/zsh.git .zsh
+ln -s .zsh/zshrc ~/.zshrc
 ln -s .zsh/zlogout .zlogout 
 ln -s .zsh/zshenv .zshenv 
 
-Additionally, you may need to install:
-  zsh-completions
-  zsh-syntax-highlighting
-Available through github and Homebrew
+### init submodules (extras)
+cd ~/.zsh/
+git submodule init
+git submodule update
 
-" vim:ft=mkd
+### add extras
+cd ~/.zsh/
+mkdir extras
+git submodule add https://github.com/zsh-users/zsh-foo.git extras/zsh-foo
+
+### update extras
+git submodule foreach git pull origin master
+git submodule update
+
+" zsh:ft=mkd

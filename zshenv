@@ -1,4 +1,4 @@
-# fish shell like syntax highlighting for zsh
-if [ -d /usr/local/share/zsh-syntax-highlighting ]; then
-  export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+# fish shell like syntax highlighting
+if [ -d $HOME/.zsh/extras/zsh-syntax-highlighting ]; then
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOME/.zsh/extras/zsh-syntax-highlighting/highlighters
 fi
