@@ -14,11 +14,10 @@ git submodule update
 
 ### add extras
 cd ~/.zsh/
-mkdir extras
 git submodule add https://github.com/zsh-users/zsh-foo.git extras/zsh-foo
 
 ### update extras
 git submodule foreach git pull origin master
 git submodule update
 
-" zsh:ft=mkd
+" vim:ft=mkd
