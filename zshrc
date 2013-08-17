@@ -131,6 +131,6 @@ for GOODIES ($HOME/.zsh/lib/*.zsh); do
   source $GOODIES
 done
 
-date +"%m-%d-%Y"
+date +"%d-%m-%Y"
 
 # vim:ft=zsh
