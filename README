@@ -15,8 +15,10 @@ git submodule update
 ### add extras
 cd ~/.zsh/
 git submodule add https://github.com/zsh-users/zsh-foo.git extras/zsh-foo
+git submodule update
 
 ### update extras
+cd ~/.zsh/
 git submodule foreach git pull origin master
 git submodule update
 
