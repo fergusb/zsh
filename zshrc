@@ -4,9 +4,9 @@
 # From: Fergus Bremner
 # Email: <fergus.bremner@gmail.com>
  
-# set PATH so it includes user bin if it exists
-if [ -d ~/bin ] ; then
-	PATH=~/bin:"${PATH}"
+# set PATH so it includes user bin (if it exists)
+if [ -d $HOME/bin ] ; then
+	export PATH=$HOME/bin:$PATH
 fi
 
 export PATH=/usr/bin:$PATH
@@ -20,7 +20,7 @@ export LC_CTYPE=$LANG
 
 export COLORFGBG="default;default" # for mutt & vi
 
-# if you REALLY like vi
+# integrate vim goodness
 EDITOR="vim"
 VISUAL="vim"
 bindkey -v 
@@ -33,17 +33,17 @@ bindkey '^N' history-search-forward
 
 # huge history
 export HISTSIZE=5000
-export HISTFILE="$HOME/.zsh/history"
+export HISTFILE=$HOME/.zsh/history
 export SAVEHIST=$HISTSIZE
 setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
-setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
-setopt share_history # share command history data
-unsetopt nomatch # print error for no match
+setopt share_history
+unsetopt nomatch
 
 # add some readline keys back
 bindkey "^A" beginning-of-line
@@ -116,7 +116,6 @@ export LESS="-R"
 # keychain for gpg-agent
 if (( $+commands[keychain] )) ; then
   eval $(keychain $HOME/.ssh/id_dsa --eval --quiet)
-  #eval $(keychain --eval --quiet)
   #eval $(keychain --eval --clear --quiet)
 fi
 
