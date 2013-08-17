@@ -72,11 +72,6 @@ setopt CHASE_LINKS
 # enable extended globbing
 setopt EXTENDED_GLOB
 
-# completion
-if [ -d /usr/local/share/zsh-completions ]; then
-  fpath=(/usr/local/share/zsh-completions $fpath)
-fi
-
 autoload -Uz compinit && compinit
 
 unsetopt menu_complete   # do not autoselect the first completion entry
@@ -125,8 +120,17 @@ if (( $+commands[keychain] )) ; then
   #eval $(keychain --eval --clear --quiet)
 fi
 
-# load extra goodness
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# extra completions
+if [ -d /usr/local/share/zsh-completions ]; then
+  fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+
+# fish shell like syntax highlighting
+if [ -d /usr/local/share/zsh-syntax-highlighting ]; then
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# load custom goodness
 for GOODIES ($HOME/.zsh/lib/*.zsh); do
   source $GOODIES
 done
