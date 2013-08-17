@@ -72,6 +72,12 @@ setopt CHASE_LINKS
 # enable extended globbing
 setopt EXTENDED_GLOB
 
+# extra completions
+if [ -d $HOME/.zsh/extras/zsh-completions ]; then
+  fpath=($HOME/.zsh/extras/zsh-completions/src $fpath)
+fi
+
+# load complations
 autoload -Uz compinit && compinit
 
 unsetopt menu_complete   # do not autoselect the first completion entry
@@ -117,11 +123,6 @@ export LESS="-R"
 if (( $+commands[keychain] )) ; then
   eval $(keychain $HOME/.ssh/id_dsa --eval --quiet)
   #eval $(keychain --eval --clear --quiet)
-fi
-
-# extra completions
-if [ -d $HOME/.zsh/extras/zsh-completions/src ]; then
-  fpath=($HOME/.zsh/extras/zsh-completions/src $fpath)
 fi
 
 # fish shell like syntax highlighting
