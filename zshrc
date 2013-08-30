@@ -126,6 +126,11 @@ if (( $+commands[keychain] )) ; then
   #eval $(keychain --eval --clear --quiet)
 fi
 
+# python virtualenv
+if [ -d $HOME/.virtualenv ]; then
+  source $HOME/.virtualenv/bin/activate
+fi
+
 # fish shell like syntax highlighting
 if [ -d $HOME/.zsh/extras/zsh-syntax-highlighting ]; then
   source $HOME/.zsh/extras/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
