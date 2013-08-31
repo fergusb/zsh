@@ -58,4 +58,4 @@ zle -N zle-keymap-select
 zle -N zle-line-init
 zle -N zle-line-finish
 
-RPROMPT='${VI_MODE}'
+RPROMPT=' ${VI_MODE}'
