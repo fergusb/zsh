@@ -47,7 +47,7 @@ case `id -u` in
 esac
 
 # vi mode indicator
-MODE_INDICATOR="%{$fg_bold[white]%}CMD%{$reset_color%}"
+MODE_INDICATOR="%{$fg[white]%}CMD%{$reset_color%}"
 
 function zle-keymap-select zle-line-init zle-line-finish {
   VI_MODE="${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}" # only show CMD
