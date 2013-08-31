@@ -126,9 +126,12 @@ if (( $+commands[keychain] )) ; then
   #eval $(keychain --eval --clear --quiet)
 fi
 
-# python virtualenv
+# python virtualenv(s)
 if [ -d $HOME/.virtualenv ]; then
   source $HOME/.virtualenv/bin/activate
+elif [ -d $HOME/.virtualenvs ]; then
+  export WORKON_HOME=$HOME/.virtualenvs
+  source /usr/local/bin/virtualenvwrapper.sh
 fi
 
 # fish shell like syntax highlighting

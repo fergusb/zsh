@@ -22,7 +22,11 @@ cd ~/.zsh/
 git submodule foreach git pull origin master
 git submodule update
 
-Finally, to update completions, do:
+To update completions, do:
 rm -f ~/.zcompdump; compinit
+
+## Python environment
+sudo pip install virtualenv virtualenvwrapper
+mkdir ~/.virtualenvwrapper
 
 " vim:ft=mkd
