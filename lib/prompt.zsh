@@ -13,19 +13,15 @@ function __git_prompt {
   local UNMERGED="%{$fg[red]%}"
   local RESET="%{$terminfo[sgr0]%}"
   git rev-parse --git-dir >& /dev/null
-  if [[ $? == 0 ]]
-  then
+  if [[ $? == 0 ]]; then
     echo -n "["
-    if [[ `git ls-files -u >& /dev/null` == '' ]]
-    then
+    if [[ `git ls-files -u >& /dev/null` == '' ]]; then
       git diff --quiet >& /dev/null
-      if [[ $? == 1 ]]
-      then
+      if [[ $? == 1 ]]; then
         echo -n $DIRTY
       else
         git diff --cached --quiet >& /dev/null
-        if [[ $? == 1 ]]
-        then
+        if [[ $? == 1 ]]; then
           echo -n $DIRTY
         else
           echo -n $CLEAN
