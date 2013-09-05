@@ -20,6 +20,7 @@ alias lr='ls -lR |more'         # recursive ls with more (scrollbar)
 alias lg='ls | grep '           # ls in current dir with grep
 
 # corrections
+alias aws='nocorrect aws'
 alias cp='nocorrect cp'
 alias git='nocorrect git'
 alias man='nocorrect man'
@@ -27,6 +28,7 @@ alias mkdir='nocorrect mkdir'
 alias mv='nocorrect mv'
 alias mysql='nocorrect mysql'
 alias vi='nocorrect vim'
+alias vim='nocorrect vim'
 
 # Admin
 alias cdwd='cd `pwd`'
