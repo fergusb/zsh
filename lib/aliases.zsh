@@ -29,6 +29,7 @@ alias mkdir='nocorrect mkdir'
 alias mutt='nocorrect mutt'
 alias mv='nocorrect mv'
 alias mysql='nocorrect mysql'
+alias pip='nocorrect pip'
 alias vi='nocorrect vim'
 alias vim='nocorrect vim'
 
