@@ -23,6 +23,7 @@ alias lg='ls | grep '           # ls in current dir with grep
 alias aws='nocorrect aws'
 alias cp='nocorrect cp'
 alias git='nocorrect git'
+alias mail='nocorrect mail'
 alias man='nocorrect man'
 alias mkdir='nocorrect mkdir'
 alias mutt='nocorrect mutt'
