@@ -73,16 +73,8 @@ setopt CHASE_LINKS
 # enable extended globbing
 setopt EXTENDED_GLOB
 
-# extra completions
-if [ -d $HOME/.zsh/extras/zsh-completions ]; then
-  fpath=($HOME/.zsh/extras/zsh-completions/src $fpath)
-fi
-
-# load completions
-autoload -Uz compinit && compinit
-
-unsetopt menu_complete   # do not autoselect the first completion entry
-unsetopt flowcontrol
+#unsetopt menu_complete   # do not autoselect the first completion entry
+#unsetopt flowcontrol
 setopt auto_menu         # show completion menu on succesive tab press
 setopt complete_in_word
 setopt always_to_end
@@ -122,7 +114,7 @@ export LESS="-R"
 
 # keychain for gpg-agent
 if (( $+commands[keychain] )) ; then
-  eval $(keychain $HOME/.ssh/id_dsa --eval --quiet)
+  #eval $(keychain $HOME/.ssh/id_dsa --eval --quiet)
   #eval $(keychain --eval --clear --quiet)
 fi
 
@@ -139,10 +131,18 @@ if [ -d $HOME/.zsh/extras/zsh-syntax-highlighting ]; then
   source $HOME/.zsh/extras/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# extra completions
+if [ -d $HOME/.zsh/extras/zsh-completions ]; then
+  fpath=($HOME/.zsh/extras/zsh-completions/src $fpath)
+fi
+
 # load custom goodness
 for GOODIES ($HOME/.zsh/lib/*.zsh); do
   source $GOODIES
 done
+
+# load & init completions last
+autoload -Uz compinit && compinit
 
 #date +"%d-%m-%Y"
 
