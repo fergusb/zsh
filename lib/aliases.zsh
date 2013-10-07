@@ -30,6 +30,7 @@ alias mutt='nocorrect mutt'
 alias mv='nocorrect mv'
 alias mysql='nocorrect mysql'
 alias pip='nocorrect pip'
+alias ssh='nocorrect ssh'
 alias vi='nocorrect vim'
 alias vim='nocorrect vim'
 
