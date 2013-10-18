@@ -32,6 +32,7 @@ alias mux='nocorrect mux'
 alias mysql='nocorrect mysql'
 alias offlineimap='nocorrect offlineimap'
 alias pip='nocorrect pip'
+alias ssh='nocorrect ssh'
 alias vi='nocorrect vim'
 alias vim='nocorrect vim'
 
