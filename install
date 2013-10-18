@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 CWD=$(pwd) 
 DATE=$(date +"%Y%m%d%H%M")
-files="zsh zshrc"
+files=(zsh zshrc)
 
 # clear old symlink or backup old settings, if there are any
 if [ -h $HOME/.zsh ] ; then
