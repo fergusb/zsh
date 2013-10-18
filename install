@@ -29,6 +29,6 @@ wait
 if [ -f $HOME/.zcompdump ] ; then
   rm $HOME/.zcompdump
 fi
-printf "initialising zshrc..."
+printf "initialising zshrc...\n"
 source $HOME/.zshrc > /dev/null 2>&1
 printf "All done!\n"
