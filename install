@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+CWD=$(pwd) 
+DATE=$(date +"%Y%m%d%H%M")
+files="zsh zshrc"
+
+# clear old symlink or backup old settings, if there are any
+if [ -h $HOME/.zsh ] ; then
+  rm $HOME/.zsh
+elif [ "$CWD" != "$HOME/.zsh" ] ; then
+  for file in $files; do
+    if [ ! -h $file ] ; then
+      echo "Renaming existing $file to $file-$DATE"
+      mv $HOME/.$file $HOME/.$file-$DATE
+    fi
+  done
+  echo "Creating symlink to $CWD in home directory."
+  ln -s $CWD $HOME/.zsh
+fi
+
+# final flourish
+ln -s $HOME/.zsh/zshrc $HOME/.zshrc
+ln -s $HOME/.zsh/zlogout $HOME/.zlogout 
+ln -s $HOME/.zsh/zshenv $HOME/.zshenv 
+git submodule init
+wait
+git submodule update --recursive
+wait
+if [ -f $HOME/.zcompdump ] ; then
+  rm $HOME/.zcompdump
+fi
+printf "All done!\n"

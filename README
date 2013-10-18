@@ -1,13 +1,17 @@
-# zsh
+# zsh loveliness from Fergus
 
 ## installation
-cd [or] cd ~/
-git clone git://github.com/fergusb/zsh.git .zsh
-ln -s .zsh/zshrc ~/.zshrc
-ln -s .zsh/zlogout .zlogout 
-ln -s .zsh/zshenv .zshenv 
+Use the project install file.
+The installer will backup old settings with a date stamp and create symliks as necessary
 
-### init submodules (extras)
+  cd vim 
+  ./install
+or
+  cd .vim
+  ./install
+cd [or] cd ~/
+
+### init submodules (not needed with installer)
 cd ~/.zsh/
 git submodule init
 git submodule update
