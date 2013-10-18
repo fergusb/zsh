@@ -22,6 +22,7 @@ fi
 ln -s $HOME/.zsh/zshrc $HOME/.zshrc
 ln -s $HOME/.zsh/zlogout $HOME/.zlogout 
 ln -s $HOME/.zsh/zshenv $HOME/.zshenv 
+printf "installing submodules...\n"
 git submodule init
 wait
 git submodule update --recursive
