@@ -35,7 +35,7 @@ for file in $files; do
 done
 
 # install submodues and init
-printf "installing submodules...\n"
+printf "Installing submodules...\n"
 git submodule init
 wait
 git submodule update --recursive
@@ -43,6 +43,6 @@ wait
 if [ -f $HOME/.zcompdump ] ; then
   rm $HOME/.zcompdump
 fi
-printf "initialising zshrc...\n"
+printf "Initialising zshrc...\n"
 source $HOME/.zshrc > /dev/null 2>&1
 printf "All done!\n"
