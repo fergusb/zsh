@@ -4,7 +4,7 @@ CWD=$(pwd)
 DATE=$(date +"%Y%m%d%H%M")
 files=(zlogout zshrc zshenv)
 
-# clear old symlink or backup old settings, if there are any
+# clear old symlink or backup old zsh dir, if it exists
 if [ -h $HOME/.zsh ] ; then
   echo "Removing stale symlink ~/.zsh"
   rm $HOME/.zsh
