@@ -2,26 +2,39 @@
 
 CWD=$(pwd) 
 DATE=$(date +"%Y%m%d%H%M")
-files=(zsh zshrc)
+files=(zlogout zshrc zshenv)
 
 # clear old symlink or backup old settings, if there are any
 if [ -h $HOME/.zsh ] ; then
+  echo "Removing stale symlink ~/.zsh"
   rm $HOME/.zsh
 elif [ "$CWD" != "$HOME/.zsh" ] ; then
-  for file in $files; do
-    if [ ! -h $file ] ; then
-      echo "Renaming existing $file to $file-$DATE"
-      mv $HOME/.$file $HOME/.$file-$DATE
-    fi
-  done
-  echo "Creating symlink to $CWD in home directory."
+  if [ -d $HOME/.zsh ] ; then
+    echo "Backing up existing ~/.zsh to ~/.zsh-$DATE"
+    mv $HOME/.zsh $HOME/.zsh-$DATE
+  fi
+  echo "Creating ~/.zsh symlink to $CWD"
   ln -s $CWD $HOME/.zsh
 fi
 
-# final flourish
-ln -s $HOME/.zsh/zshrc $HOME/.zshrc
-ln -s $HOME/.zsh/zlogout $HOME/.zlogout 
-ln -s $HOME/.zsh/zshenv $HOME/.zshenv 
+# clear old symlinks or backup old settings, if there are any
+for file in $files; do
+  if [ -h $HOME/.$file ] ; then
+    echo "Removing stale symlink $file"
+    rm $HOME/.$file
+  elif [ -f $HOME/.$file ] ; then
+    echo "Backing up existing ~/.$file to ~/.$file-$DATE"
+    mv $HOME/.$file $HOME/.$file-$DATE
+  fi
+done
+
+# create symlinks
+for file in $files; do
+  echo "Creating ~/.$file symlink"
+  ln -s $HOME/.zsh/$file $HOME/.$file
+done
+
+# install submodues and init
 printf "installing submodules...\n"
 git submodule init
 wait
