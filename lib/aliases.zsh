@@ -35,6 +35,7 @@ alias pip='nocorrect pip'
 alias ssh='nocorrect ssh'
 alias vi='nocorrect vim'
 alias vim='nocorrect vim'
+alias sudo='nocorrect sudo'
 
 # Admin
 alias cdwd='cd `pwd`'
