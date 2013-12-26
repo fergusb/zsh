@@ -36,6 +36,7 @@ alias ssh='nocorrect ssh'
 alias vi='nocorrect vim'
 alias vim='nocorrect vim'
 alias sudo='nocorrect sudo'
+alias tmux='nocorrect tmux'
 
 # Admin
 alias cdwd='cd `pwd`'
