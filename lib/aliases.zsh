@@ -52,6 +52,10 @@ alias rl='rlogin'
 # alias server_name='ssh -v -l USERNAME IP ADDRESS'
 alias which='type -all'
 
+# tmux
+alias tma='tmux attach -d -t'
+alias git-tmux='tmux new -s $(basename $(pwd))'
+
 # System
 alias reboot='sudo /sbin/shutdown -r now'
 alias shutdown='sudo /sbin/shutdown -h now'
