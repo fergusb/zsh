@@ -19,6 +19,12 @@ export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8  
 export LC_CTYPE=$LANG
 
+if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
+  __LS_FLAGS='-G'
+else
+  __LS_FLAGS='--color=auto'
+fi
+
 export COLORFGBG="default;default" # for mutt & vi
 
 # integrate vim goodness
