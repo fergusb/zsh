@@ -64,12 +64,13 @@ alias suspend='sudo pm-suspend'
 
 # Applications and utilities
 alias apache2ctl='sudo /usr/sbin/apache2ctl'
-alias eclipse-php='/usr/local/bin/eclipse-php/eclipse'
-alias eclipse='/usr/local/bin/eclipse/eclipse'
+#alias eclipse-php='/usr/local/bin/eclipse-php/eclipse'
+#alias eclipse='/usr/local/bin/eclipse/eclipse'
 #alias gvim='gvim -p --remote-tab-silent'
 alias gvim='UBUNTU_MENUPROXY= gvim'
 alias escputil='sudo escputil'
 alias inklevel='escputil -iqur /dev/usb/lp0'
+alias python='python3'
 alias randline="/usr/bin/rl"
 alias tidy='tidy -config $HOME/.tidy.conf'
 alias updatedb='sudo updatedb'
@@ -83,11 +84,6 @@ if [[ uname == 'Darwin' ]]; then
 fi
 
 alias shred='shred -fvzu'
-
-# Mutt
-#alias mutt='LOCAL_CONFIG=spool /usr/bin/mutt'
-#alias mutt-apollo='LOCAL_CONFIG=apollo /usr/bin/mutt'
-#alias mutt-gmail='LOCAL_CONFIG=gmail /usr/bin/mutt'
 
 # SUFFIXES
 alias -s css=$EDITOR
