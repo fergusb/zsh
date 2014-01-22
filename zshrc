@@ -118,6 +118,9 @@ if (( $+commands[keychain] )) ; then
   #eval $(keychain --eval --clear --quiet)
 fi
 
+# SSH_AUTH_SOCK / tmux helper
+export SSH_AUTH_SOCK=$(find /tmp/ssh-* -name agent.\* -uid $(id -u) | head -n 1)
+
 # python virtualenv(s)
 if [ -d $HOME/.virtualenv ]; then
   source $HOME/.virtualenv/bin/activate
