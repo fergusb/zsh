@@ -71,7 +71,7 @@ alias grep='grep --colour=auto'
 alias gvim='UBUNTU_MENUPROXY= gvim'
 alias escputil='sudo escputil'
 alias inklevel='escputil -iqur /dev/usb/lp0'
-alias python='python3'
+#alias python='python3'
 alias randline="/usr/bin/rl"
 alias tidy='tidy -config $HOME/.tidy.conf'
 alias tree='tree -C'
