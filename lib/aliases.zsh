@@ -50,7 +50,7 @@ alias ifconfig='/sbin/ifconfig'
 alias path='echo -e ${PATH//:/\\n}'
 alias rl='rlogin'
 # alias server_name='ssh -v -l USERNAME IP ADDRESS'
-alias which='type -all'
+alias which='which -a'
 
 # tmux
 alias tma='tmux attach -d -t'
@@ -71,7 +71,7 @@ alias grep='grep --colour=auto'
 alias gvim='UBUNTU_MENUPROXY= gvim'
 alias escputil='sudo escputil'
 alias inklevel='escputil -iqur /dev/usb/lp0'
-alias python='python3'
+#alias python='python3'
 alias randline="/usr/bin/rl"
 alias tidy='tidy -config $HOME/.tidy.conf'
 alias tree='tree -C'
