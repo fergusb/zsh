@@ -36,7 +36,8 @@ function __git_prompt {
   fi
 }
  
-export PS2='$(__git_prompt)'
+#export PS2='$(__git_prompt)'
+export PS2='$(git_super_status)'
 
 # prompt
 PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}$PS2
