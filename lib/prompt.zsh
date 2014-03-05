@@ -6,7 +6,7 @@ autoload -U promptinit && promptinit
 # expand functions in the prompt
 setopt prompt_subst
 
-# nice git prompt by Ian McKellar
+# basic git prompt by Ian McKellar
 function git_prompt {
   local CLEAN="%{$fg[green]%}"
   local DIRTY="%{$fg[magenta]%}"
@@ -36,12 +36,9 @@ function git_prompt {
   fi
 }
 
-# adapted from code found at <https://gist.github.com/1712320>.
+# adapted from code found at <https://gist.github.com/joshdick/4415470>.
  
-setopt prompt_subst
-autoload -U colors && colors # Enable colors in prompt
- 
-# Modify the colors and symbols in these variables as desired.
+# modify the colors and symbols in these variables as desired.
 GIT_PROMPT_PREFIX="%{$reset_color%}["
 GIT_PROMPT_SUFFIX="%{$reset_color%}]"
 GIT_PROMPT_AHEAD="%{$fg[blue]%}+NUM%{$reset_color%} "
@@ -54,14 +51,12 @@ GIT_PROMPT_CLEAN="%{$fg[white]%}"
  
 # show git branch/tag, or name-rev if on detached head
 parse_git_branch() {
-  (git branch | grep '* ' | sed 's/..//')
-  #(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
+  (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
 }
  
-# Show different symbols as appropriate for various Git repository states
+# show different colours depending upon git repository states
 parse_git_state() {
  
-  # Compose this value via multiple conditional appends.
   local GIT_STATE=""
  
   local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
@@ -96,22 +91,20 @@ parse_git_state() {
   fi
 }
 
-# Show count of stashed changes
+# show count of stashed changes
 parse_git_stash() {
   local -a stashes
-  if [[ -s $(git rev-parse --show-toplevel)/.git/refs/stash ]] ; then
 
-      stashes=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
-      #stashes=$(git stash list 2>/dev/null | wc -l | awk '{print $1}')
-      echo " (${stashes} stashed)"
+  if [[ -s $(git rev-parse --show-toplevel)/.git/refs/stash ]]; then
+    stashes=$(git stash list 2> /dev/null | wc -l | tr -d ' ')
+    echo " (${stashes} stashed)"
   fi
 }
  
-# If inside a Git repository, print its branch and state
+# if in a git repository, print its branch and state
 git_prompt_string() {
   local git_where="$(parse_git_branch)"
-  [ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX$(parse_git_state)${git_where}$GIT_PROMPT_SUFFIX$(parse_git_stash)"
-  #[ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX$(parse_git_state)${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_stash)"
+  [ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX$(parse_git_state)${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_stash)"
 }
  
 export PS2='$(git_prompt_string)'
