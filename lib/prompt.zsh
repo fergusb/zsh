@@ -75,7 +75,7 @@ parse_git_branch() {
 parse_git_state() {
  
   # Compose this value via multiple conditional appends.
-  local GIT_STATE="$GIT_PROMPT_CLEAN"
+  local GIT_STATE=""
  
   local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
   if [ "$NUM_AHEAD" -gt 0 ]; then
@@ -107,7 +107,6 @@ parse_git_state() {
   if [[ -n $GIT_STATE ]]; then
     echo "$GIT_STATE"
   fi
- 
 }
  
 # If inside a Git repository, print its branch and state
