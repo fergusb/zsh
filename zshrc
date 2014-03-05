@@ -88,6 +88,9 @@ setopt always_to_end
 # rainbows
 autoload -U colors && colors
 
+# code versioning
+autoload -Uz vcs_info
+
 # command line
 autoload -U edit-command-line
 zle -N edit-command-line

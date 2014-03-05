@@ -36,7 +36,7 @@ function git_prompt {
   fi
 }
 
-# Adapted from code found at <https://gist.github.com/1712320>.
+# adapted from code found at <https://gist.github.com/1712320>.
  
 setopt prompt_subst
 autoload -U colors && colors # Enable colors in prompt
@@ -52,9 +52,10 @@ GIT_PROMPT_MODIFIED="%{$fg[magenta]%}"
 GIT_PROMPT_STAGED="%{$fg[green]%}"
 GIT_PROMPT_CLEAN="%{$fg[white]%}"
  
-# Show Git branch/tag, or name-rev if on detached head
+# show git branch/tag, or name-rev if on detached head
 parse_git_branch() {
-  (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
+  (git branch | grep '* ' | sed 's/..//')
+  #(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
 }
  
 # Show different symbols as appropriate for various Git repository states
@@ -98,9 +99,8 @@ parse_git_state() {
 # Show count of stashed changes
 parse_git_stash() {
   local -a stashes
+  if [[ -s $(git rev-parse --show-toplevel)/.git/refs/stash ]] ; then
 
-  #if [[ -s .git/refs/stash ]] ; then
-  if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
       stashes=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
       #stashes=$(git stash list 2>/dev/null | wc -l | awk '{print $1}')
       echo " (${stashes} stashed)"
@@ -110,7 +110,8 @@ parse_git_stash() {
 # If inside a Git repository, print its branch and state
 git_prompt_string() {
   local git_where="$(parse_git_branch)"
-  [ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX$(parse_git_state)${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_stash)"
+  [ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX$(parse_git_state)${git_where}$GIT_PROMPT_SUFFIX$(parse_git_stash)"
+  #[ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX$(parse_git_state)${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_stash)"
 }
  
 export PS2='$(git_prompt_string)'
