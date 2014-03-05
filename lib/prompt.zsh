@@ -100,7 +100,8 @@ parse_git_stash() {
   local -a stashes
 
   if [[ -s .git/refs/stash ]] ; then
-      stashes=$(git stash list 2>/dev/null | wc -l | awk '{print $1}')
+      stashes=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
+      #stashes=$(git stash list 2>/dev/null | wc -l | awk '{print $1}')
       echo " (${stashes} stashed)"
   fi
 }
