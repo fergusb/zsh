@@ -97,12 +97,12 @@ parse_git_state() {
 
 # Show count of stashed changes
 parse_git_stash() {
-    local -a stashes
+  local -a stashes
 
-    if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
-        stashes=$(git stash list 2>/dev/null | wc -l)
-        hook_com[misc]+=" [${stashes} stashed]"
-    fi
+  if [[ -s .git/refs/stash ]] ; then
+      stashes=$(git stash list 2>/dev/null | wc -l)
+      echo " (${stashes} stashed)"
+  fi
 }
  
 # If inside a Git repository, print its branch and state
