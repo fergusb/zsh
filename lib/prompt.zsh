@@ -35,7 +35,9 @@ function __git_prompt {
           echo -n $DIRTY
         else
           if [ "$NUM_AHEAD" -gt 0 ]; then
-          echo -n $CLEAN$AHEAD$NUM_AHEAD
+            echo -n $CLEAN$AHEAD$NUM_AHEAD
+          else
+            echo -n $CLEAN
           fi
         fi
       fi
