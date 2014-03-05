@@ -7,14 +7,10 @@ autoload -U promptinit && promptinit
 setopt prompt_subst
 
 # nice git prompt by Ian McKellar
-function __git_prompt {
+function git_prompt {
   local CLEAN="%{$fg[green]%}"
   local DIRTY="%{$fg[magenta]%}"
-  local AHEAD="+"
-  local BEHIND="-"
   local UNMERGED="%{$fg[red]%}"
-  local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
-  local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
   local RESET="%{$terminfo[sgr0]%}"
   git rev-parse --git-dir >& /dev/null
   if [[ $? == 0 ]]; then
@@ -22,23 +18,13 @@ function __git_prompt {
     if [[ `git ls-files -u >& /dev/null` == '' ]]; then
       git diff --quiet >& /dev/null
       if [[ $? == 1 ]]; then
-        #echo -n $DIRTY
-        if [ "$NUM_AHEAD" -gt 0 ]; then
-          echo -n $DIRTY$AHEAD$NUM_AHEAD" "
-        fi
-        if [ "$NUM_BEHIND" -gt 0 ]; then
-          echo -n $DIRTY$BEHIN$NUM_BEHIND" "
-        fi
+        echo -n $DIRTY
       else
         git diff --cached --quiet >& /dev/null
         if [[ $? == 1 ]]; then
           echo -n $DIRTY
         else
-          if [ "$NUM_AHEAD" -gt 0 ]; then
-            echo -n $CLEAN$AHEAD$NUM_AHEAD
-          else
-            echo -n $CLEAN
-          fi
+          echo -n $CLEAN
         fi
       fi
     else
@@ -116,7 +102,7 @@ git_prompt_string() {
 }
  
 export PS2='$(git_prompt_string)'
-#export PS2='$(__git_prompt)'
+#export PS2='$(git_prompt)'
 
 # prompt
 PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}$PS2
