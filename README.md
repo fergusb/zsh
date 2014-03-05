@@ -1,4 +1,4 @@
-# zsh loveliness from Fergus
+# zsh excellence from Fergus
 
 ## installation
 Use the project install file.  
@@ -43,8 +43,8 @@ rm -f ~/.zcompdump; compinit
 
 ## Python environment
 ```
-sudo pip install virtualenv virtualenvwrapper
-mkdir ~/.virtualenvwrapper
+pip install virtualenvwrapper
+mkdir ~/.virtualenvs
 ```
 
 " vim:ft=mkd
