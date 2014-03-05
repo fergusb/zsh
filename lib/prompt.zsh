@@ -64,6 +64,7 @@ GIT_PROMPT_MERGING="%{$fg[yellow]%}"
 GIT_PROMPT_UNTRACKED="%{$fg[red]%}"
 GIT_PROMPT_MODIFIED="%{$fg[magenta]%}"
 GIT_PROMPT_STAGED="%{$fg[green]%}"
+GIT_PROMPT_CLEAN="%{$fg[white]%}"
  
 # Show Git branch/tag, or name-rev if on detached head
 parse_git_branch() {
@@ -74,7 +75,7 @@ parse_git_branch() {
 parse_git_state() {
  
   # Compose this value via multiple conditional appends.
-  local GIT_STATE=""
+  local GIT_STATE="$GIT_PROMPT_CLEAN"
  
   local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
   if [ "$NUM_AHEAD" -gt 0 ]; then
