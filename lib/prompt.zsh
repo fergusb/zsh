@@ -64,6 +64,7 @@ GIT_PROMPT_MERGING="%{$fg[white]%}"
 GIT_PROMPT_UNTRACKED="%{$fg[red]%}"
 GIT_PROMPT_MODIFIED="%{$fg[magenta]%}"
 GIT_PROMPT_STAGED="%{$fg[green]%}"
+GIT_PROMPT_CLEAN="%{$fg[green]%}"
  
 # Show Git branch/tag, or name-rev if on detached head
 parse_git_branch() {
@@ -101,6 +102,10 @@ parse_git_state() {
  
   if ! git diff --cached --quiet 2> /dev/null; then
     GIT_STATE=$GIT_STATE$GIT_PROMPT_STAGED
+  fi
+ 
+  if ! git diff --quiet 0> /dev/null; then
+    GIT_STATE=$GIT_STATE$GIT_PROMPT_CLEAN
   fi
  
   if [[ -n $GIT_STATE ]]; then
