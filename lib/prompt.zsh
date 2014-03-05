@@ -7,7 +7,7 @@ autoload -U promptinit && promptinit
 setopt prompt_subst
 
 # nice git prompt by Ian McKellar
-function __git_prompt {
+function git_prompt {
   local CLEAN="%{$fg[green]%}"
   local DIRTY="%{$fg[magenta]%}"
   local UNMERGED="%{$fg[red]%}"
@@ -36,7 +36,7 @@ function __git_prompt {
   fi
 }
  
-#export PS2='$(__git_prompt)'
+#export PS2='$(git_prompt)'
 export PS2='$(git_super_status)'
 
 # prompt
