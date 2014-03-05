@@ -104,7 +104,7 @@ parse_git_state() {
     GIT_STATE=$GIT_STATE$GIT_PROMPT_STAGED
   fi
  
-  if ! git diff --quiet 0> /dev/null; then
+  if git diff --quiet 0> /dev/null; then
     GIT_STATE=$GIT_STATE$GIT_PROMPT_CLEAN
   fi
  
