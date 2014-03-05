@@ -36,11 +36,13 @@ function chpwd_update_git_vars() {
 }
 
 function update_current_git_vars() {
-    unset __CURRENT_GIT_STATUS
+  unset __CURRENT_GIT_STATUS
+  local RESET="%{$terminfo[sgr0]%}"
+  local gitstatus="$__GIT_PROMPT_DIR/gitstatus.py"
 
-    local gitstatus="$__GIT_PROMPT_DIR/gitstatus.py"
-    _GIT_STATUS=`python ${gitstatus}`
-    __CURRENT_GIT_STATUS=("${(@f)_GIT_STATUS}")
+  _GIT_STATUS=`python ${gitstatus}`
+  __CURRENT_GIT_STATUS=("${(@f)_GIT_STATUS}")
+
 	GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
 	GIT_REMOTE=$__CURRENT_GIT_STATUS[2]
 	GIT_STAGED=$__CURRENT_GIT_STATUS[3]
@@ -76,6 +78,7 @@ git_super_status() {
 	  fi
 	  STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
 	  echo "$STATUS"
+    echo -n $RESET
 	fi
 }
 
@@ -90,6 +93,6 @@ ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}+"
 ZSH_THEME_GIT_PROMPT_REMOTE=""
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[blue]%}…"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
-#ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%}✔ "
+#ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}✔ "
 
 
