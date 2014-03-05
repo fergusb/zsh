@@ -10,9 +10,11 @@ setopt prompt_subst
 function __git_prompt {
   local CLEAN="%{$fg[green]%}"
   local DIRTY="%{$fg[magenta]%}"
-  local AHEAD="%{$fg[blue]%}↑NUM%{$reset_color%}"
-  local BEHIND="%{$fg[blue]%}↓NUM%{$reset_color%}"
+  local AHEAD="+"
+  local BEHIND="-"
   local UNMERGED="%{$fg[red]%}"
+  local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
+  local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
   local RESET="%{$terminfo[sgr0]%}"
   git rev-parse --git-dir >& /dev/null
   if [[ $? == 0 ]]; then
@@ -20,16 +22,17 @@ function __git_prompt {
     if [[ `git ls-files -u >& /dev/null` == '' ]]; then
       git diff --quiet >& /dev/null
       if [[ $? == 1 ]]; then
-        echo -n $DIRTY
+        #echo -n $DIRTY
+        if [ "$NUM_AHEAD" -gt 0 ]; then
+          echo -n $DIRTY$AHEAD$NUM_AHEAD" "
+        fi
+        if [ "$NUM_BEHIND" -gt 0 ]; then
+          echo -n $DIRTY$BEHIN$NUM_BEHIND" "
+        fi
       else
         git diff --cached --quiet >& /dev/null
         if [[ $? == 1 ]]; then
-          local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
-          #if [ "$NUM_AHEAD" -gt 0 ]; then
-            #GIT_STATE=$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$NUM_AHEAD}
-            echo -n $DIRTY$$NUM_AHEAD
-          #fi
-          #echo -n $DIRTY
+          echo -n $DIRTY
         else
           echo -n $CLEAN
         fi
