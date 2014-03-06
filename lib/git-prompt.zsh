@@ -1,10 +1,10 @@
-# To install source this file from your .zshrc file
+#!/usr/bin/env zsh
 
 # change this to reflect your installation directory
 export __GIT_PROMPT_DIR=~/.zsh/scripts
-# Initialize colors.
-autoload -U colors
-colors
+
+# initialize colors.
+autoload -U colors && colors
 
 # allow for functions in the prompt.
 setopt PROMPT_SUBST
@@ -61,15 +61,15 @@ function update_current_git_vars() {
 	GIT_CLEAN=$__CURRENT_GIT_STATUS[7]
 }
 
-
 git_super_status() {
 	precmd_update_git_vars
+  BRANCH_STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
     if [ -n "$__CURRENT_GIT_STATUS" ]; then
-	  STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}"
+	  STATUS="$BRANCH_STATUS"
 	  if [ -n "$GIT_REMOTE" ]; then
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_REMOTE$GIT_REMOTE%{${reset_color}%}"
 	  fi
-	  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
+	  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_PREFIX"
 	  if [ "$GIT_STAGED" -ne "0" ]; then
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
 	  fi
@@ -82,24 +82,20 @@ git_super_status() {
 	  if [ "$GIT_UNTRACKED" -ne "0" ]; then
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
 	  fi
-    STATUS="$STATUS"
-	  if [ "$GIT_CLEAN" -eq "1" ]; then
-		  STATUS="$STATUS"
-			#STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
-	  fi
 	  STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+	  if [ "$GIT_CLEAN" -eq "1" ]; then
+      STATUS="$BRANCH_STATUS"
+	  fi
     echo "$STATUS$(parse_git_stash)"
 	fi
 }
 
-# Default values for the appearance of the prompt. Configure at will.
+# default values for the appearance of the prompt
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="]"
-ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}±"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}+"
 ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}×"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}+"
-ZSH_THEME_GIT_PROMPT_REMOTE=""
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[magenta]%}+"
+ZSH_THEME_GIT_PROMPT_REMOTE="%{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[white]%}✔ "
