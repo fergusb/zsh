@@ -3,6 +3,7 @@
 # git prompt
 # adapted from code found at <https://gist.github.com/joshdick/4415470>.
  
+# edit clolors as you like
 GIT_PROMPT_PREFIX="%{$reset_color%}["
 GIT_PROMPT_SUFFIX="%{$reset_color%}]"
 GIT_PROMPT_AHEAD="%{$fg[blue]%}+NUM%{$reset_color%}"
