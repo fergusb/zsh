@@ -3,8 +3,7 @@
 # Change this to reflect your installation directory
 export __GIT_PROMPT_DIR=~/.zsh/scripts
 # Initialize colors.
-autoload -U colors
-colors
+autoload -U colors &&  colors
 
 # Allow for functions in the prompt.
 setopt PROMPT_SUBST
