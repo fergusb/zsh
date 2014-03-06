@@ -83,7 +83,9 @@ git_super_status() {
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
 	  fi
 	  STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-	  if [ "$GIT_CLEAN" -eq "1" ]; then
+	  if [ "$GIT_CLEAN" -eq "1" ] && [ -n "$GIT_REMOTE" ]; then
+		  STATUS="$BRANCH_STATUS$ZSH_THEME_GIT_PROMPT_REMOTE$GIT_REMOTE%{${reset_color}%}"
+    elif [ "$GIT_CLEAN" -eq "1" ]; then
       STATUS="$BRANCH_STATUS"
 	  fi
     echo "$STATUS$(parse_git_stash)"
