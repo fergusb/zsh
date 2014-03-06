@@ -71,7 +71,7 @@ parse_git_stash() {
 
   if [[ -s $(git rev-parse --show-toplevel)/.git/refs/stash ]]; then
     stashes=$(git stash list 2> /dev/null | wc -l | tr -d ' ')
-    echo " (${stashes} stashed)"
+    echo "(${stashes} stashed)"
   fi
 }
  
