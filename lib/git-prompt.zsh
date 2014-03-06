@@ -83,3 +83,4 @@ git_prompt_string() {
 }
  
 export PS2='$(git_prompt_string)'
+
