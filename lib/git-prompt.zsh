@@ -4,19 +4,25 @@
 # adapted from code found at <https://gist.github.com/joshdick/4415470>.
  
 # modify the colors and symbols in these variables as desired.
-#GIT_PROMPT_SYMBOL="%{$fg[blue]%}±"
+#GIT_PROMPT_PREFIX="%{$fg[green]%}[%{$reset_color%}"
+#GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
 GIT_PROMPT_PREFIX="%{$reset_color%}["
 GIT_PROMPT_SUFFIX="%{$reset_color%}]"
-GIT_PROMPT_AHEAD="%{$fg[blue]%}+NUM%{$reset_color%} "
-GIT_PROMPT_BEHIND="%{$fg[blue]%}-NUM%{$reset_color%} "
-GIT_PROMPT_MERGING="%{$fg[blue]%}"
-GIT_PROMPT_UNTRACKED="%{$fg[red]%}"
-GIT_PROMPT_MODIFIED="%{$fg[magenta]%}"
-GIT_PROMPT_STAGED="%{$fg[green]%}"
-#GIT_PROMPT_MERGING="%{$fg[magenta]%}⚡︎%{$reset_color%}"
-#GIT_PROMPT_UNTRACKED="%{$fg[red]%}|%{$reset_color%}"
-#GIT_PROMPT_MODIFIED="%{$fg[yellow]%}|%{$reset_color%}"
-#GIT_PROMPT_STAGED="%{$fg[green]%}|%{$reset_color%}"
+GIT_PROMPT_AHEAD="%{$fg[blue]%}+NUM%{$reset_color%}"
+GIT_PROMPT_BEHIND="%{$fg[blue]%}-NUM%{$reset_color%}"
+GIT_PROMPT_MERGING="%{$fg[magenta]%}⚡︎%{$reset_color%}"
+GIT_PROMPT_UNTRACKED="%{$fg[red]%}●%{$reset_color%}"
+GIT_PROMPT_MODIFIED="%{$fg[yellow]%}●%{$reset_color%}"
+GIT_PROMPT_STAGED="%{$fg[green]%}●%{$reset_color%}"
+
+#GIT_PROMPT_PREFIX="%{$reset_color%}["
+#GIT_PROMPT_SUFFIX="%{$reset_color%}]"
+#GIT_PROMPT_AHEAD="%{$fg[blue]%}+NUM%{$reset_color%} "
+#GIT_PROMPT_BEHIND="%{$fg[blue]%}-NUM%{$reset_color%} "
+#GIT_PROMPT_MERGING="%{$fg[blue]%}"
+#GIT_PROMPT_UNTRACKED="%{$fg[red]%}"
+#GIT_PROMPT_MODIFIED="%{$fg[magenta]%}"
+#GIT_PROMPT_STAGED="%{$fg[green]%}"
  
 # show git branch/tag, or name-rev if on detached head
 parse_git_branch() {
@@ -56,7 +62,8 @@ parse_git_state() {
   fi
  
   if [[ -n $GIT_STATE ]]; then
-    echo "$GIT_STATE"
+    #echo "$GIT_STATE"
+    echo "$GIT_PROMPT_PREFIX$GIT_STATE$GIT_PROMPT_SUFFIX"
   fi
 }
 
@@ -73,8 +80,9 @@ parse_git_stash() {
 # if in a git repository, print its branch, state and stash count (if any)
 git_prompt_string() {
   local git_where="$(parse_git_branch)"
-  [ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX$(parse_git_state)${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_stash)"
+  #[ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX$(parse_git_state)${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_stash)"
   #[ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_state)$(parse_git_stash)"
+  [ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_state)$(parse_git_stash)"
 }
  
 export PS2='$(git_prompt_string)'
