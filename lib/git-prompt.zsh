@@ -36,6 +36,16 @@ function chpwd_update_git_vars() {
     update_current_git_vars
 }
 
+# show count of stashed changes
+function parse_git_stash() {
+  local -a stashes
+
+  if [[ -s $(git rev-parse --show-toplevel)/.git/refs/stash ]]; then
+    stashes=$(git stash list 2> /dev/null | wc -l | tr -d ' ')
+    echo "[${stashes} stashed]"
+  fi
+}
+ 
 function update_current_git_vars() {
     unset __CURRENT_GIT_STATUS
 
@@ -76,7 +86,7 @@ git_super_status() {
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
 	  fi
 	  STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-	  echo "$STATUS"
+    echo "$STATUS$(parse_git_stash)"
 	fi
 }
 
