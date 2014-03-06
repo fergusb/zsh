@@ -82,6 +82,7 @@ git_super_status() {
 	  if [ "$GIT_UNTRACKED" -ne "0" ]; then
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
 	  fi
+    STATUS="$STATUS"
 	  if [ "$GIT_CLEAN" -eq "1" ]; then
 		  STATUS="$STATUS"
 			#STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
