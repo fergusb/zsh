@@ -3,9 +3,6 @@
 # git prompt
 # adapted from code found at <https://gist.github.com/joshdick/4415470>.
  
-# modify the colors and symbols in these variables as desired.
-#GIT_PROMPT_PREFIX="%{$fg[green]%}[%{$reset_color%}"
-#GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
 GIT_PROMPT_PREFIX="%{$reset_color%}["
 GIT_PROMPT_SUFFIX="%{$reset_color%}]"
 GIT_PROMPT_AHEAD="%{$fg[blue]%}+NUM%{$reset_color%}"
