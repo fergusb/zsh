@@ -64,6 +64,7 @@ function update_current_git_vars() {
 git_super_status() {
 	precmd_update_git_vars
     BRANCH_STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+		REMOTE_STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_REMOTE$GIT_REMOTE%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
     if [ -n "$__CURRENT_GIT_STATUS" ]; then
     #BRANCH_STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
 	  STATUS="$BRANCH_STATUS"
@@ -85,7 +86,7 @@ git_super_status() {
 	  fi
 	  STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
 	  if [ "$GIT_CLEAN" -eq "1" ]; then
-      STATUS="$BRANCH_STATUS"
+      STATUS="$BRANCH_STATUS$REMOTE_STATUS"
 	  fi
     echo "$STATUS$(parse_git_stash)"
 	fi
