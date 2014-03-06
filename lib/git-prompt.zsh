@@ -67,11 +67,11 @@ parse_git_state() {
 
 # show count of stashed changes
 parse_git_stash() {
-  local -a stashes
+  local -a STASHES
 
   if [[ -s $(git rev-parse --show-toplevel)/.git/refs/stash ]]; then
-    stashes=$(git stash list 2> /dev/null | wc -l | tr -d ' ')
-    echo "(${stashes} stashed)"
+    STASHES="$(git stash list 2> /dev/null | wc -l | tr -d ' ')"
+    echo "[${STASHES} stashed]"
   fi
 }
  
