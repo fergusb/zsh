@@ -83,7 +83,8 @@ git_super_status() {
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
 	  fi
 	  if [ "$GIT_CLEAN" -eq "1" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
+		  STATUS="$STATUS"
+			#STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
 	  fi
 	  STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
     echo "$STATUS$(parse_git_stash)"
