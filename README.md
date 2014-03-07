@@ -1,4 +1,4 @@
-# zsh excellence from Fergus
+# zsh settings for Fergus
 
 ## installation
 Use the project install file.  

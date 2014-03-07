@@ -85,9 +85,6 @@ setopt auto_menu         # show completion menu on succesive tab press
 setopt complete_in_word
 setopt always_to_end
 
-# rainbows
-autoload -U colors && colors
-
 # code versioning
 autoload -Uz vcs_info
 
@@ -121,15 +118,6 @@ setopt long_list_jobs
 export PAGER="less"
 export LESS="-R"
 
-# keychain for gpg-agent
-if (( $+commands[keychain] )) ; then
-  #eval $(keychain $HOME/.ssh/id_dsa --eval --quiet)
-  #eval $(keychain --eval --clear --quiet)
-fi
-
-# SSH_AUTH_SOCK / tmux helper
-#export SSH_AUTH_SOCK=$(find /tmp/ssh-* -name agent.\* -uid $(id -u) | head -n 1)
-
 # python virtualenv(s)
 if [ -d $HOME/.virtualenv ]; then
   source $HOME/.virtualenv/bin/activate
@@ -158,6 +146,6 @@ done
 # load & init completions last
 autoload -Uz compinit && compinit
 
-#date +"%d-%m-%Y"
+#date +"%F"
 
 # vim:ft=zsh

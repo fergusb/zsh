@@ -30,7 +30,7 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
 
 # keep trailing slash (broken)
-zstyle ':completion:*' squeeze-slashes false
+zstyle ':completion:*' accept-exact-dirs squeeze-slashes true
 
 # complete from history
 zstyle ':completion:history-words:*' list no 

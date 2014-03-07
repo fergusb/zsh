@@ -1,42 +1,15 @@
 #!/usr/bin/env zsh
 
+# rainbows
+autoload -U colors && colors
+
 # advanced prompts
 autoload -U promptinit && promptinit
 
 # expand functions in the prompt
 setopt prompt_subst
 
-# basic git prompt by Ian McKellar
-function git_prompt {
-  local CLEAN="%{$fg[green]%}"
-  local DIRTY="%{$fg[magenta]%}"
-  local UNMERGED="%{$fg[red]%}"
-  local RESET="%{$terminfo[sgr0]%}"
-  git rev-parse --git-dir >& /dev/null
-  if [[ $? == 0 ]]; then
-    echo -n "["
-    if [[ `git ls-files -u >& /dev/null` == '' ]]; then
-      git diff --quiet >& /dev/null
-      if [[ $? == 1 ]]; then
-        echo -n $DIRTY
-      else
-        git diff --cached --quiet >& /dev/null
-        if [[ $? == 1 ]]; then
-          echo -n $DIRTY
-        else
-          echo -n $CLEAN
-        fi
-      fi
-    else
-      echo -n $UNMERGED
-    fi
-    echo -n `git branch | grep '* ' | sed 's/..//'`
-    echo -n $RESET
-    echo -n "]"
-  fi
-}
- 
-#export PS2='$(git_prompt)'
+# git prompt magic - see git-prompt.zsh
 export PS2='$(git_super_status)'
 
 # prompt
