@@ -142,7 +142,7 @@ fi
 
 # fish shell like syntax highlighting
 if [ -d $HOME/.zsh/extras/zsh-syntax-highlighting ]; then
-  source $HOME/.zsh/extras/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  #source $HOME/.zsh/extras/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # extra completions
