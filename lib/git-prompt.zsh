@@ -52,45 +52,45 @@ function update_current_git_vars() {
     local gitstatus="$__GIT_PROMPT_DIR/gitstatus.py"
     _GIT_STATUS=`python ${gitstatus}`
     __CURRENT_GIT_STATUS=("${(@f)_GIT_STATUS}")
-	GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
-	GIT_REMOTE=$__CURRENT_GIT_STATUS[2]
-	GIT_STAGED=$__CURRENT_GIT_STATUS[3]
-	GIT_CONFLICTS=$__CURRENT_GIT_STATUS[4]
-	GIT_CHANGED=$__CURRENT_GIT_STATUS[5]
-	GIT_UNTRACKED=$__CURRENT_GIT_STATUS[6]
-	GIT_CLEAN=$__CURRENT_GIT_STATUS[7]
+  GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
+  GIT_REMOTE=$__CURRENT_GIT_STATUS[2]
+  GIT_STAGED=$__CURRENT_GIT_STATUS[3]
+  GIT_CONFLICTS=$__CURRENT_GIT_STATUS[4]
+  GIT_CHANGED=$__CURRENT_GIT_STATUS[5]
+  GIT_UNTRACKED=$__CURRENT_GIT_STATUS[6]
+  GIT_CLEAN=$__CURRENT_GIT_STATUS[7]
 }
 
 git_super_status() {
-	precmd_update_git_vars
+  precmd_update_git_vars
   BRANCH_STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-	REMOTE_STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_REMOTE$GIT_REMOTE%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  REMOTE_STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_REMOTE$GIT_REMOTE%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
     if [ -n "$__CURRENT_GIT_STATUS" ]; then
-	  STATUS="$BRANCH_STATUS"
-	  if [ -n "$GIT_REMOTE" ]; then
-		  STATUS="$STATUS$REMOTE_STATUS"
-	  fi
-	  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_PREFIX"
-	  if [ "$GIT_STAGED" -ne "0" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
-	  fi
-	  if [ "$GIT_CONFLICTS" -ne "0" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
-	  fi
-	  if [ "$GIT_CHANGED" -ne "0" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED%{${reset_color}%}"
-	  fi
-	  if [ "$GIT_UNTRACKED" -ne "0" ]; then
-		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
-	  fi
-	  STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-	  if [ "$GIT_CLEAN" -eq "1" ] && [ -n "$GIT_REMOTE" ]; then
-		  STATUS="$BRANCH_STATUS$REMOTE_STATUS"
+    STATUS="$BRANCH_STATUS"
+    if [ -n "$GIT_REMOTE" ]; then
+      STATUS="$STATUS$REMOTE_STATUS"
+    fi
+    STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_PREFIX"
+    if [ "$GIT_STAGED" -ne "0" ]; then
+      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
+    fi
+    if [ "$GIT_CONFLICTS" -ne "0" ]; then
+      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
+    fi
+    if [ "$GIT_CHANGED" -ne "0" ]; then
+      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED%{${reset_color}%}"
+    fi
+    if [ "$GIT_UNTRACKED" -ne "0" ]; then
+      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
+    fi
+    STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+    if [ "$GIT_CLEAN" -eq "1" ] && [ -n "$GIT_REMOTE" ]; then
+      STATUS="$BRANCH_STATUS$REMOTE_STATUS"
     elif [ "$GIT_CLEAN" -eq "1" ]; then
       STATUS="$BRANCH_STATUS"
-	  fi
+    fi
     echo "$STATUS$(parse_git_stash)"
-	fi
+  fi
 }
 
 # default values for the appearance of the prompt
