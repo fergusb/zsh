@@ -42,7 +42,7 @@ function parse_git_stash() {
 
   if [[ -s $(git rev-parse --show-toplevel)/.git/refs/stash ]]; then
     stashes=$(git stash list 2> /dev/null | wc -l | tr -d ' ')
-    echo "[${stashes} stashed]"
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${stashes} stashed]"
   fi
 }
  
@@ -102,3 +102,4 @@ ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}×"
 ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[magenta]%}+"
 ZSH_THEME_GIT_PROMPT_REMOTE="%{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
+ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[blue]%}"
