@@ -35,8 +35,9 @@ function git_prompt {
     echo -n "]"
   fi
 }
-
+ 
 #export PS2='$(git_prompt)'
+export PS2='$(git_super_status)'
 
 # prompt
 PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}$PS2

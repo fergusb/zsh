@@ -1,87 +1,104 @@
 #!/usr/bin/env zsh
 
-# git prompt
-# adapted from code found at <https://gist.github.com/joshdick/4415470>.
- 
-# edit clolors as you like
-GIT_PROMPT_PREFIX="%{$reset_color%}["
-GIT_PROMPT_SUFFIX="%{$reset_color%}]"
-GIT_PROMPT_AHEAD="%{$fg[blue]%}+NUM%{$reset_color%}"
-GIT_PROMPT_BEHIND="%{$fg[blue]%}-NUM%{$reset_color%}"
-GIT_PROMPT_MERGING="%{$fg[magenta]%}⚡︎%{$reset_color%}"
-GIT_PROMPT_UNTRACKED="%{$fg[red]%}●%{$reset_color%}"
-GIT_PROMPT_MODIFIED="%{$fg[yellow]%}●%{$reset_color%}"
-GIT_PROMPT_STAGED="%{$fg[green]%}●%{$reset_color%}"
+# change this to reflect your installation directory
+export __GIT_PROMPT_DIR=~/.zsh/scripts
 
-#GIT_PROMPT_PREFIX="%{$reset_color%}["
-#GIT_PROMPT_SUFFIX="%{$reset_color%}]"
-#GIT_PROMPT_AHEAD="%{$fg[blue]%}+NUM%{$reset_color%} "
-#GIT_PROMPT_BEHIND="%{$fg[blue]%}-NUM%{$reset_color%} "
-#GIT_PROMPT_MERGING="%{$fg[blue]%}"
-#GIT_PROMPT_UNTRACKED="%{$fg[red]%}"
-#GIT_PROMPT_MODIFIED="%{$fg[magenta]%}"
-#GIT_PROMPT_STAGED="%{$fg[green]%}"
- 
-# show git branch/tag, or name-rev if on detached head
-parse_git_branch() {
-  (git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null
+# initialize colors.
+autoload -U colors && colors
+
+# allow for functions in the prompt.
+setopt PROMPT_SUBST
+
+autoload -U add-zsh-hook
+
+add-zsh-hook chpwd chpwd_update_git_vars
+add-zsh-hook preexec preexec_update_git_vars
+add-zsh-hook precmd precmd_update_git_vars
+
+## Function definitions
+function preexec_update_git_vars() {
+    case "$2" in
+        git*|hub*|gh*|stg*)
+        __EXECUTED_GIT_COMMAND=1
+        ;;
+    esac
 }
- 
-# show different colours depending upon git repository states
-parse_git_state() {
- 
-  local GIT_STATE=""
- 
-  local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
-  if [ "$NUM_AHEAD" -gt 0 ]; then
-    GIT_STATE=$GIT_STATE${GIT_PROMPT_AHEAD//NUM/$NUM_AHEAD}
-  fi
- 
-  local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
-  if [ "$NUM_BEHIND" -gt 0 ]; then
-    GIT_STATE=$GIT_STATE${GIT_PROMPT_BEHIND//NUM/$NUM_BEHIND}
-  fi
- 
-  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
-  if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_MERGING
-  fi
- 
-  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_UNTRACKED
-  fi
- 
-  if ! git diff --quiet 2> /dev/null; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_MODIFIED
-  fi
- 
-  if ! git diff --cached --quiet 2> /dev/null; then
-    GIT_STATE=$GIT_STATE$GIT_PROMPT_STAGED
-  fi
- 
-  if [[ -n $GIT_STATE ]]; then
-    #echo "$GIT_STATE"
-    echo "$GIT_PROMPT_PREFIX$GIT_STATE$GIT_PROMPT_SUFFIX"
-  fi
+
+function precmd_update_git_vars() {
+    ZSH_THEME_GIT_PROMPT_NOCACHE=1
+    if [ -n "$__EXECUTED_GIT_COMMAND" ] || [ -n "$ZSH_THEME_GIT_PROMPT_NOCACHE" ]; then
+        update_current_git_vars
+        unset __EXECUTED_GIT_COMMAND
+    fi
+}
+
+function chpwd_update_git_vars() {
+    update_current_git_vars
 }
 
 # show count of stashed changes
-parse_git_stash() {
-  local -a STASHES
+function parse_git_stash() {
+  local -a stashes
 
   if [[ -s $(git rev-parse --show-toplevel)/.git/refs/stash ]]; then
-    STASHES="$(git stash list 2> /dev/null | wc -l | tr -d ' ')"
-    echo "[${STASHES} stashed]"
+    stashes=$(git stash list 2> /dev/null | wc -l | tr -d ' ')
+    echo "[${stashes} stashed]"
   fi
 }
  
-# if in a git repository, print its branch, state and stash count (if any)
-git_prompt_string() {
-  local git_where="$(parse_git_branch)"
-  #[ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX$(parse_git_state)${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_stash)"
-  #[ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_state)$(parse_git_stash)"
-  [ -n "$git_where" ] && echo "$GIT_PROMPT_PREFIX%{$fg[yellow]%}${git_where#(refs/heads/|tags/)}$GIT_PROMPT_SUFFIX$(parse_git_state)$(parse_git_stash)"
-}
- 
-export PS2='$(git_prompt_string)'
+function update_current_git_vars() {
+    unset __CURRENT_GIT_STATUS
 
+    local gitstatus="$__GIT_PROMPT_DIR/gitstatus.py"
+    _GIT_STATUS=`python ${gitstatus}`
+    __CURRENT_GIT_STATUS=("${(@f)_GIT_STATUS}")
+	GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
+	GIT_REMOTE=$__CURRENT_GIT_STATUS[2]
+	GIT_STAGED=$__CURRENT_GIT_STATUS[3]
+	GIT_CONFLICTS=$__CURRENT_GIT_STATUS[4]
+	GIT_CHANGED=$__CURRENT_GIT_STATUS[5]
+	GIT_UNTRACKED=$__CURRENT_GIT_STATUS[6]
+	GIT_CLEAN=$__CURRENT_GIT_STATUS[7]
+}
+
+git_super_status() {
+	precmd_update_git_vars
+  BRANCH_STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+	REMOTE_STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_REMOTE$GIT_REMOTE%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+    if [ -n "$__CURRENT_GIT_STATUS" ]; then
+	  STATUS="$BRANCH_STATUS"
+	  if [ -n "$GIT_REMOTE" ]; then
+		  STATUS="$STATUS$REMOTE_STATUS"
+	  fi
+	  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_PREFIX"
+	  if [ "$GIT_STAGED" -ne "0" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
+	  fi
+	  if [ "$GIT_CONFLICTS" -ne "0" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
+	  fi
+	  if [ "$GIT_CHANGED" -ne "0" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED%{${reset_color}%}"
+	  fi
+	  if [ "$GIT_UNTRACKED" -ne "0" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
+	  fi
+	  STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+	  if [ "$GIT_CLEAN" -eq "1" ] && [ -n "$GIT_REMOTE" ]; then
+		  STATUS="$BRANCH_STATUS$REMOTE_STATUS"
+    elif [ "$GIT_CLEAN" -eq "1" ]; then
+      STATUS="$BRANCH_STATUS"
+	  fi
+    echo "$STATUS$(parse_git_stash)"
+	fi
+}
+
+# default values for the appearance of the prompt
+ZSH_THEME_GIT_PROMPT_PREFIX="["
+ZSH_THEME_GIT_PROMPT_SUFFIX="]"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}+"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}×"
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[magenta]%}+"
+ZSH_THEME_GIT_PROMPT_REMOTE="%{$fg[blue]%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
