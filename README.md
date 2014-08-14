@@ -5,12 +5,12 @@ Use the project install file.
 The installer will backup old settings with a date stamp and create symliks as necessary
 
 ```
-cd vim 
+cd zsh 
 ./install
 ```
 or
 ```
-cd .vim
+cd .zsh
 ./install
 ```
 cd [or] cd ~/
@@ -44,7 +44,6 @@ rm -f ~/.zcompdump; compinit
 ## Python environment
 ```
 pip install virtualenvwrapper
-mkdir ~/.virtualenvs
 ```
 
 " vim:ft=mkd
