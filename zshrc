@@ -19,11 +19,17 @@ export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8  
 export LC_CTYPE=$LANG
 
+# OS X specific
 if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
   __LS_FLAGS='-G'
   export JAVA_HOME=`/usr/libexec/java_home -v 1.6`
 else
   __LS_FLAGS='--color=auto'
+fi
+
+# Maven stuff
+if [[ -n "$commands[mvn]" ]]; then
+  export MAVEN_OPTS="-Xmx1024m -Dfile.encoding=UTF-8 -XX:+UseConcMarkSweepGC -XX:MaxPermSize=128m"
 fi
 
 export COLORFGBG="default;default" # for mutt & vi
