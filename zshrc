@@ -135,20 +135,20 @@ if [[ -n "$commands[virtualenvwrapper.sh]" ]]; then
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-# fish shell like syntax highlighting
-if [ -d $HOME/.zsh/extras/zsh-syntax-highlighting ]; then
-  source $HOME/.zsh/extras/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
+# load custom goodness
+for GOODIES ($HOME/.zsh/lib/*.zsh); do
+  source $GOODIES
+done
 
 # extra completions
 if [ -d $HOME/.zsh/extras/zsh-completions ]; then
   fpath=($HOME/.zsh/extras/zsh-completions/src $fpath)
 fi
 
-# load custom goodness
-for GOODIES ($HOME/.zsh/lib/*.zsh); do
-  source $GOODIES
-done
+# fish shell like syntax highlighting
+if [ -d $HOME/.zsh/extras/zsh-syntax-highlighting ]; then
+  source $HOME/.zsh/extras/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # load & init completions last
 autoload -Uz compinit && compinit
