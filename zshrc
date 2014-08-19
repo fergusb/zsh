@@ -22,7 +22,7 @@ export LC_CTYPE=$LANG
 # OS X specific
 if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
   __LS_FLAGS='-G'
-  export JAVA_HOME=`/usr/libexec/java_home -v 1.6`
+  export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 else
   __LS_FLAGS='--color=auto'
 fi
@@ -54,6 +54,7 @@ setopt extended_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_ignore_space
+setopt hist_reduce_blanks
 setopt hist_verify
 setopt inc_append_history
 setopt share_history

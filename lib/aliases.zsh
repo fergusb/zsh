@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 # navigation
-alias .='pwd'
 alias ..='cd ..'
+alias ...='cd ../../'
 
 #alias d='dirs -v | head -10'
 alias dh='dirs -v'
@@ -59,8 +59,6 @@ alias git-tmux='tmux new -s $(basename $(pwd))'
 # System
 alias reboot='sudo /sbin/shutdown -r now'
 alias shutdown='sudo /sbin/shutdown -h now'
-alias suspend='sudo pm-suspend'
-#alias sleep='sudo pm-suspend'
 
 # Applications and utilities
 alias apache2ctl='sudo /usr/sbin/apache2ctl'
@@ -68,24 +66,27 @@ alias apache2ctl='sudo /usr/sbin/apache2ctl'
 #alias eclipse='/usr/local/bin/eclipse/eclipse'
 alias grep='grep --colour=auto'
 #alias gvim='gvim -p --remote-tab-silent'
-alias gvim='UBUNTU_MENUPROXY= gvim'
 alias escputil='sudo escputil'
 alias inklevel='escputil -iqur /dev/usb/lp0'
 #alias python='python3'
 alias randline="/usr/bin/rl"
 alias tidy='tidy -config $HOME/.tidy.conf'
 alias tree='tree -C'
-alias updatedb='sudo updatedb'
 alias vi='vim'
-if [[ uname == 'Linux' ]]; then
-  alias open='xdg-open'
-fi
-if [[ uname == 'Darwin' ]]; then
+
+if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
+  alias ql='qlmanage -p 2>/dev/null' # OS X Quick Look
+  alias oo='open .' # open current dir in OS X Finder
   # nuke duplicates in the Open With submenu.
   alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
 fi
 
-alias shred='shred -fvzu'
+if [[ $(uname) == 'Linux' ]]; then # if we're on penguin power
+  alias open='xdg-open'
+  alias gvim='UBUNTU_MENUPROXY= gvim'
+  alias suspend='sudo pm-suspend'
+  alias updatedb='sudo updatedb'
+fi
 
 # SUFFIXES
 alias -s css=$EDITOR

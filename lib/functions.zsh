@@ -17,6 +17,7 @@ function extract() {
     case $1 in
       *.tar.bz2)   tar xvjf $1     ;;
       *.tar.gz)    tar xvzf $1     ;;
+      *.tar.xz)    tar xvJf $1     ;;
       *.bz2)       bunzip2 $1      ;;
       *.rar)       unrar x $1      ;;
       *.gz)        gunzip $1       ;;
@@ -52,32 +53,10 @@ function fixperms() {
   fi
 }
 
-# Tar and gzip a directory
-function gztar { tar -cplf - $1 | gzip -9 > $1.tar.gz; }
-
 # make dir and switch to it
-function mkcd {
+function mcd {
   mkdir -p $1
   cd $1
-}
-
-# auto send an attachment from CLI {{{
-function sendfile() {
-  if [ $# -ne 2 ]; then
-    echo "usage: send [file] [recipient]"
-  else
-    echo "Please see attached..." | mutt -s "File: $1" -a $1 -- $2 &
-  fi
-}
-
-# send someone a text
-sendtxt() {
-  if [ $# -lt 2 ]; then
-    echo "usage: sendtxt [number] [some message]"
-  else
-    number="$1"; shift
-    echo "$*" | mail "$number@vtext.com"
-  fi
 }
 
 # symlink regardless of order passed
@@ -96,5 +75,15 @@ function symlink() {
     ln -s $2 $1
   fi
 }
+
+if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
+  function vol() {
+    if [[ -n $1 ]]; then 
+      osascript -e "set volume output volume $1"
+    else
+      osascript -e "output volume of (get volume settings)"
+    fi
+  } 
+fi
 
 # vim:ft=zsh
