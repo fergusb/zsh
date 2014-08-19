@@ -88,6 +88,11 @@ if [[ $(uname) == 'Linux' ]]; then # if we're on penguin power
   alias updatedb='sudo updatedb'
 fi
 
+if [[ -n "$commands[brew]" ]]; then
+  alias python='/usr/local/bin/python'
+  alias vim='/usr/local/bin/vim'
+fi
+
 # SUFFIXES
 alias -s css=$EDITOR
 alias -s html=$BROWSER
