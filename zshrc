@@ -131,7 +131,9 @@ if [[ -n "$commands[virtualenvwrapper.sh]" ]]; then
   export WORKON_HOME=$HOME/.virtualenvs
   export PROJECT_HOME=$HOME/Projects
   export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-  mkdir -p $WORKON_HOME
+  if [ ! -d "$WORKON_HOME" ] ; then
+    mkdir -p $WORKON_HOME
+  fi
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
