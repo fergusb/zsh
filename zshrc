@@ -134,7 +134,7 @@ if [[ -n "$commands[virtualenvwrapper.sh]" ]]; then
   if [ ! -d "$WORKON_HOME" ] ; then
     mkdir -p $WORKON_HOME
   fi
-  source /usr/local/bin/virtualenvwrapper.sh
+  source $VIRTUALENVWRAPPER_SCRIPT
 fi
 
 # load custom goodness
