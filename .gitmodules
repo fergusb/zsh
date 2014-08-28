@@ -1,6 +1,3 @@
-[submodule "extras/zsh-completions"]
-	path = extras/zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
 [submodule "extras/zsh-syntax-highlighting"]
 	path = extras/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
