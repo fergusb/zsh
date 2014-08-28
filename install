@@ -38,8 +38,11 @@ done
 printf "Installing submodules...\n"
 git submodule init
 wait
+git submodule foreach git pull origin master
+wait
 git submodule update --recursive
 wait
+printf "Done...\n"
 if [ -f $HOME/.zcompdump ] ; then
   rm $HOME/.zcompdump
 fi
