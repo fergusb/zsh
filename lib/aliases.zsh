@@ -89,8 +89,8 @@ if [[ $(uname) == 'Linux' ]]; then # if we're on penguin power
 fi
 
 if [[ -n "$commands[brew]" ]]; then
-  alias python='/usr/local/bin/python'
-  alias vim='/usr/local/bin/vim'
+  #alias python='/usr/local/bin/python'
+  #alias vim='/usr/local/bin/vim'
 fi
 
 # SUFFIXES
