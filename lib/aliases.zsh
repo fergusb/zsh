@@ -77,6 +77,8 @@ alias vi='vim'
 if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
   alias ql='qlmanage -p 2>/dev/null' # OS X Quick Look
   alias oo='open .' # open current dir in OS X Finder
+  alias pg.start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+  alias pg.stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
   # nuke duplicates in the Open With submenu.
   alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
 fi
