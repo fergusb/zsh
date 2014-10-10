@@ -22,14 +22,13 @@ export LC_CTYPE=$LANG
 # OS X specific
 if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
   __LS_FLAGS='-G'
-  export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 else
   __LS_FLAGS='--color=auto'
 fi
 
-# Maven stuff
-if [[ -n "$commands[mvn]" ]]; then
-  export MAVEN_OPTS="-Xmx1024m -Dfile.encoding=UTF-8 -XX:+UseConcMarkSweepGC -XX:MaxPermSize=128m"
+# rainbows
+if [ "$TERM" == "xterm"  ]; then
+  export TERM=xterm-256color
 fi
 
 export COLORFGBG="default;default" # for mutt & vi
