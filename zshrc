@@ -22,7 +22,7 @@ export LC_CTYPE=$LANG
 # OS X specific
 if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
   __LS_FLAGS='-G'
-else
+else #  
   __LS_FLAGS='--color=auto'
   export TERM=xterm-256color
 fi
