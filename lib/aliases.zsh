@@ -63,6 +63,7 @@ alias shutdown='sudo /sbin/shutdown -h now'
 
 # Applications and utilities
 alias apache2ctl='sudo /usr/sbin/apache2ctl'
+alias busy='cat /dev/urandom | hexdump -C | grep "ca fe"'
 #alias eclipse-php='/usr/local/bin/eclipse-php/eclipse'
 #alias eclipse='/usr/local/bin/eclipse/eclipse'
 alias grep='grep --colour=auto'

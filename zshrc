@@ -24,10 +24,6 @@ if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
   __LS_FLAGS='-G'
 else
   __LS_FLAGS='--color=auto'
-fi
-
-# rainbows
-if [ "$TERM" == "xterm"  ]; then
   export TERM=xterm-256color
 fi
 
