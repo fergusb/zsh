@@ -3,21 +3,26 @@
 # navigation
 alias ..='cd ..'
 alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
 
 #alias d='dirs -v | head -10'
 alias dh='dirs -v'
 
 # list options
-alias la='ls -a'                # show hidden
-alias lsa='ls -ld .*'           # show only hidden
-alias lx='ls -lXB'              # sort by ext
-alias lk='ls -lSr'              # sort by size
-alias lc='ls -lcr'              # sort by mod date
-alias lu='ls -lur'              # sort by last viewed
-alias lt='ls -ltr'              # sort by date
-alias lm='ls -al |more'         # ls with more (scrollbar)
-alias lr='ls -lR |more'         # recursive ls with more (scrollbar)
-alias lg='ls | grep '           # ls in current dir with grep
+alias ll='ls -lh'                #long list
+alias la='ls -ah'                # show hidden
+alias lsa='ls -ldh .*'           # show only hidden
+alias lx='ls -lXBh'              # sort by ext
+alias lk='ls -lSrh'              # sort by size
+alias lc='ls -lcrh'              # sort by mod date
+alias lu='ls -lurh'              # sort by last viewed
+alias lt='ls -ltrh'              # sort by date
+alias lm='ls -alh |more'         # ls with more (scrollbar)
+alias lr='ls -lRh |more'         # recursive ls with more (scrollbar)
+alias lg='lsh | grep '           # ls in current dir with grep
+
+alias zshrc='vim ~/.zshrc' # Quick access to the ~/.zshrc file
 
 # corrections
 alias aws='nocorrect aws'

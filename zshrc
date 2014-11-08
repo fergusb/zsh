@@ -133,7 +133,7 @@ if [[ -n "$commands[virtualenvwrapper.sh]" ]]; then
 fi
 
 # load custom goodness
-for GOODIES ($HOME/.zsh/lib/*.zsh); do
+for GOODIES ($HOME/.zsh/plugins/*.zsh); do
   source $GOODIES
 done
 
