@@ -25,6 +25,7 @@ alias lg='lsh | grep '           # ls in current dir with grep
 alias zshrc='vim ~/.zshrc' # Quick access to the ~/.zshrc file
 
 # corrections
+alias ack='nocorrect ack'
 alias aws='nocorrect aws'
 alias cp='nocorrect cp'
 alias git='nocorrect git'
