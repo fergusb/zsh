@@ -86,6 +86,16 @@ fixperms() {
   fi
 }
 
+# passwd generator
+zpasswd() {
+  if [ "$1" ]; then 
+    LC_ALL=C tr -dc '0-9A-Za-z_@#%*,.:?!~' < /dev/urandom | head -c${1:-$1}
+    echo
+  else
+    echo "Please specify a password length"
+  fi
+}
+
 # symlink regardless of order passed
 symlink() {
   if [ $# -ne 2 ]; then
