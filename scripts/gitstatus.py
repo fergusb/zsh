@@ -2,17 +2,15 @@
 # -*- coding: UTF-8 -*-
 
 from __future__ import print_function
+from subprocess import Popen, PIPE
+import sys
 
-# change those symbols to whatever you prefer
 symbols = {'ahead of': '↑', 'behind': '↓', 'prehash': ':'}
 
-from subprocess import Popen, PIPE
-
-import sys
-gitsym = Popen(
+git_sym = Popen(
     ['git', 'symbolic-ref', 'HEAD'],
     stdout=PIPE, stderr=PIPE)
-branch, error = gitsym.communicate()
+branch, error = git_sym.communicate()
 
 error_string = error.decode('utf-8')
 
@@ -29,19 +27,27 @@ if 'fatal' in err_string:
     sys.exit(0)
 
 changed_files = [namestat[0] for namestat in res.splitlines()]
+
 staged_files = [namestat[0] for namestat in Popen(
     ['git', 'diff', '--staged', '--name-status'],
     stdout=PIPE).communicate()[0].splitlines()]
+
 nb_changed = len(changed_files) - changed_files.count('U')
+
 nb_U = staged_files.count('U')
+
 nb_staged = len(staged_files) - nb_U
+
 staged = str(nb_staged)
+
 conflicts = str(nb_U)
 changed = str(nb_changed)
+
 nb_untracked = len(Popen(
     ['git', 'ls-files', '--others', '--exclude-standard'],
     stdout=PIPE).communicate()[0].splitlines()
 )
+
 untracked = str(nb_untracked)
 if not nb_changed and not nb_staged and not nb_U and not nb_untracked:
     clean = '1'

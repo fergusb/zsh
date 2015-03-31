@@ -9,8 +9,16 @@ zstyle ':completion:*' insert-unambiguous true
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
+# menu
+if [[ "$NOMENU" -eq 0 ]] ; then
+  # if there are more than 4 options allow selecting from a menu
+  zstyle ':completion:*' menu select=4
+else
+  # don't use any menus at all
+  setopt no_auto_menu
+fi
+
 # formatting and messages
-zstyle ':completion:*' menu select=2 
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 zstyle ':completion:*' auto-description 'Specify: %d'
@@ -19,7 +27,8 @@ zstyle ':completion:*' group-name ''
 #zstyle ':completion:*' format 'Completing %d'
 zstyle ":completion:*:descriptions" format "%B%d%b"
 zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format 'No matches for: %d'
+# zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*:warnings' format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d'
 zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
 
 zstyle ':completion:*' list-colors ''
@@ -55,7 +64,8 @@ zstyle ':completion:*:*:vi:*' menu yes select
 zstyle ':completion:*:*:(g|m|)vim:*' menu yes select
 
 # ignore completion functions (until the _ignored completer)
-zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion::(^approximate*):*:functions' ignored-patterns '_*'
+# zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle '*' single-ignored show
 
 # git integration
@@ -67,6 +77,19 @@ zstyle ':vcs_info:git*:*' check-for-changes true
 #zstyle ':vcs_info:git*' formats "(%s) %12.12i %c%u %b%m"
 #zstyle ':vcs_info:git*' actionformats "(%s|%a) %12.12i %c%u %b%m"
 #zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash
+
+# complete manual by their section
+zstyle ':completion:*:manuals'    separate-sections true
+zstyle ':completion:*:manuals.*'  insert-sections   true
+zstyle ':completion:*:man:*'      menu yes select
+
+# search path for sudo completion
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin \
+                                           /usr/local/bin \
+                                           /usr/sbin \
+                                           /usr/bin \
+                                           /sbin \
+                                           /bin 
 
 # linux specific
 if [[ uname == 'Linux' ]]; then

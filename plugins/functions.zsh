@@ -1,7 +1,19 @@
 #!/usr/bin/env zsh
 
+# cd to directoy and list files
+cl() {
+  emulate -L zsh
+  cd $1 && ls -la
+}
+
+# make dir and switch to it
+function mcd {
+  mkdir -p $1
+  cd $1
+}
+
 # handy calculator
-function calc () {
+calc () {
   awk "BEGIN { print $* ; }"
 }
 
@@ -12,7 +24,9 @@ qfind () {
 }
 
 # extract depending on extension
-function extract() {
+extract() {
+  emulate -L zsh
+  setopt extended_glob noclobber
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2)   tar xvjf $1     ;;
@@ -35,16 +49,16 @@ function extract() {
 }
 
 # creates archive from given directory
-function mktar() { tar cvf  "${1%%/}.tar"     "${1%%/}/"; }
-function mktgz() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
-function mktbz() { tar cvjf "${1%%/}.tar.bz2" "${1%%/}/"; }
+mktar() { tar cvf  "${1%%/}.tar"     "${1%%/}/"; }
+mktgz() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
+mktbz() { tar cvjf "${1%%/}.tar.bz2" "${1%%/}/"; }
 
 # find stuff; do stuff
-function ff() { find . -type f -iname '*'$*'*' ; }
-function fe() { find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \;  ; }
+ff() { find . -type f -iname '*'$*'*' ; }
+fe() { find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \;  ; }
 
 # recursively fix dir/file permissions on a given dir
-function fixperms() {
+fixperms() {
   if [ -d "$1" ]; then 
     find "$1" -type d -exec chmod 755 {} \; 
     find "$1" -type f -exec chmod 644 {} \;
@@ -53,14 +67,8 @@ function fixperms() {
   fi
 }
 
-# make dir and switch to it
-function mcd {
-  mkdir -p $1
-  cd $1
-}
-
 # symlink regardless of order passed
-function symlink() {
+symlink() {
   if [ $# -ne 2 ]; then
     echo "usage: symlink [link] [target]"
     echo "   or: symlink [target] [link]"
@@ -74,6 +82,32 @@ function symlink() {
   else
     ln -s $2 $1
   fi
+}
+
+# Translate DE<=>EN
+# 'translate' looks up fot a word in a file with language-to-language
+# translations (field separator should be " : "). A typical wordlist looks
+# like at follows:
+#  | english-word : german-transmission
+# It's also only possible to translate english to german but not reciprocal.
+# Use the following oneliner to turn back the sort order:
+#  $ awk -F ':' '{ print $2" : "$1" "$3 }' \
+#    /usr/local/lib/words/en-de.ISO-8859-1.vok > ~/.translate/de-en.ISO-8859-1.vok
+#f5# Translates a word
+trans() {
+    emulate -L zsh
+    case "$1" in
+        -[dD]*)
+            translate -l de-en $2
+            ;;
+        -[eE]*)
+            translate -l en-de $2
+            ;;
+        *)
+            echo "Usage: $0 { -D | -E }"
+            echo "         -D == German to English"
+            echo "         -E == English to German"
+    esac
 }
 
 if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X

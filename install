@@ -46,6 +46,7 @@ printf "Done...\n"
 if [ -f $HOME/.zcompdump ] ; then
   rm $HOME/.zcompdump
 fi
+touch $HOME/.zdirs
 printf "Initialising zshrc...\n"
 source $HOME/.zshrc > /dev/null 2>&1
 printf "All done!\n"

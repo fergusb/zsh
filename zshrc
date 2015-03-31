@@ -19,20 +19,28 @@ export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8  
 export LC_CTYPE=$LANG
 
-# OS X specific
-if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
+for var in LANG LC_ALL LC_MESSAGES ; do
+  [[ -n ${(P)var} ]] && export $var
+done
+
+# color setup for ls
+if [[ $(uname) == 'Darwin' ]]; then # we're on OS X
   __LS_FLAGS='-G'
-else #  
+  export CLICOLOR=1
+else # we're on Linux 
   __LS_FLAGS='--color=auto'
+  eval $(dircolors -b)
   export TERM=xterm-256color
 fi
 
-export COLORFGBG="default;default" # for mutt & vi
+export COLORFGBG="default;default" # for mutt & vim
 
 # integrate vim goodness
 export EDITOR=vim
 export VISUAL=vim
 bindkey -v 
+
+export MAIL=${MAIL:-/var/mail/$USER}
 
 # vi style incremental search
 bindkey '^R' history-incremental-search-backward
@@ -41,13 +49,14 @@ bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
 
 # huge history
-export HISTSIZE=5000
 export HISTFILE=$HOME/.zsh/history
+export HISTSIZE=5000
 export SAVEHIST=$HISTSIZE
 setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
+setopt histignorealldups
 setopt hist_ignore_space
 setopt hist_reduce_blanks
 setopt hist_verify
@@ -72,6 +81,7 @@ chpwd() {
 
 # automatically pushd
 setopt auto_pushd
+setopt pushd_ignore_dups
 
 # automatically enter directories without cd
 setopt auto_cd
@@ -81,16 +91,27 @@ setopt AUTOCD
 setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
 setopt cdablevars
 setopt multios
-#DIRSTACKSIZE=10
+
+# resolve symlinks 
+setopt chase_links
 
 # try to correct command line spelling
 setopt CORRECT CORRECT_ALL
 
-# resolve symlinks 
-setopt CHASE_LINKS
-
 # enable extended globbing
-setopt EXTENDED_GLOB
+setopt extended_glob
+
+# don't match dotfiles. ever.
+setopt noglobdots
+
+# try to avoid the 'zsh: no matches found...'
+setopt nonomatch
+
+# use zsh style word splitting
+ setopt noshwordsplit
+
+ # report the status of backgrounds jobs immediately
+ setopt notify
 
 #unsetopt menu_complete   # do not autoselect the first completion entry
 #unsetopt flowcontrol
