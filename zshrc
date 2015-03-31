@@ -59,9 +59,19 @@ unsetopt nomatch
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
+# directory stack
+export dirstacksize=20
+DIRSTACKFILE=~/.zdirs
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1] && cd $OLDPWD
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+
 # automatically pushd
 setopt auto_pushd
-export dirstacksize=10
 
 # automatically enter directories without cd
 setopt auto_cd
