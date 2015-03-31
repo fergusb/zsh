@@ -24,6 +24,7 @@ for var in LANG LC_ALL LC_MESSAGES ; do
 done
 
 # color setup for ls
+export LSCOLORS="Gxfxcxdxbxegedabagacad"
 if [[ $(uname) == 'Darwin' ]]; then # we're on OS X
   __LS_FLAGS='-G'
   export CLICOLOR=1
@@ -122,21 +123,13 @@ setopt always_to_end
 # code versioning
 autoload -Uz vcs_info
 
+# easy renaming
+autoload -U zmv
+
 # command line
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
-
-# ls rainbow
-export CLICOLOR=1
-#export LS_COLORS
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
-
-if [ "$DISABLE_LS_COLORS" != "true" ]
-then
-  # find the option for using colors in ls, depending on the version: Linux or BSD
-  ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G'
-fi
 
 # smart urls
 autoload -U url-quote-magic
