@@ -36,12 +36,17 @@ fi
 
 export COLORFGBG="default;default" # for mutt & vim
 
+export MAIL=${MAIL:-/var/mail/$USER}
+
 # integrate vim goodness
 export EDITOR=vim
 export VISUAL=vim
 bindkey -v 
-
-export MAIL=${MAIL:-/var/mail/$USER}
+fg-vim() {
+  fg %vim
+}
+zle -N fg-vim
+bindkey '^Z' fg-vim
 
 # vi style incremental search
 bindkey '^R' history-incremental-search-backward
