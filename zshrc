@@ -23,6 +23,11 @@ for var in LANG LC_ALL LC_MESSAGES ; do
   [[ -n ${(P)var} ]] && export $var
 done
 
+# ruby env
+if [ -d $HOME/.rbenv ] ; then
+  eval "$(rbenv init -)"
+fi
+
 # color setup for ls
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
 if [[ $(uname) == 'Darwin' ]]; then # we're on OS X
