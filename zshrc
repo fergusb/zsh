@@ -14,9 +14,9 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH
 
-# you say tomato, I say tomahto
-export LANG=en_GB.UTF-8
-export LC_ALL=en_GB.UTF-8  
+# you say tomato, I say tomato
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8  
 export LC_CTYPE=$LANG
 
 for var in LANG LC_ALL LC_MESSAGES ; do
