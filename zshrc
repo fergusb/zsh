@@ -15,8 +15,8 @@ export PATH=/usr/local/sbin:$PATH
 export PATH
 
 # you say tomato, I say tomahto
-export LANG=en_GB.UTF-8
-export LC_ALL=en_GB.UTF-8  
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8  
 export LC_CTYPE=$LANG
 
 for var in LANG LC_ALL LC_MESSAGES ; do
@@ -31,17 +31,17 @@ fi
 # color setup for ls
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
 if [[ $(uname) == 'Darwin' ]]; then # we're on OS X
-  __LS_FLAGS='-G'
+  LS_FLAGS='-G'
   export CLICOLOR=1
 else # we're on Linux 
-  __LS_FLAGS='--color=auto'
+  LS_FLAGS='--color=auto'
   eval $(dircolors -b)
   export TERM=xterm-256color
 fi
 
 export COLORFGBG="default;default" # for mutt & vim
 
-export MAIL=${MAIL:-/var/mail/$USER}
+# export MAIL=${MAIL:-/var/mail/$USER}
 
 # integrate vim goodness
 export EDITOR=vim
