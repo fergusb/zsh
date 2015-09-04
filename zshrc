@@ -29,8 +29,8 @@ if [ -d $HOME/.rbenv ] ; then
 fi
 
 # color setup for ls
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
 if [[ $(uname) == 'Darwin' ]]; then # we're on OS X
+  export LSCOLORS="Gxfxcxdxbxegedabagacad"
   LS_FLAGS='-G'
   export CLICOLOR=1
 else # we're on Linux 
