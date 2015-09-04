@@ -10,7 +10,9 @@ alias .....='cd ../../../../'
 alias dh='dirs -v'
 
 # list options
-alias ls='ls --color=auto'       # rainbows
+if [[ $(uname) == 'Linux' ]]; then
+  alias ls='ls --color=auto'       # rainbows
+fi
 alias ll='ls -lh'                # long list
 alias la='ls -ah'                # show hidden
 alias lsa='ls -ldh .*'           # show only hidden
