@@ -12,12 +12,20 @@ setopt prompt_subst
 # git prompt magic - see git-prompt.zsh
 export PS2='$(git_super_status)'
 
+# ssh coloration
+if [[ "$SSH_CONNECTION" != '' ]]; then
+  SSH_COLOR='%{$fg[red]%}'
+else
+  SSH_COLOR='%{$fg[white]%}'
+fi
+
 # prompt
-PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}$PS2
+PROMPT="[%{$fg[blue]%}%n@%m:%~%{$reset_color%}]$PS2
  "
+
 case `id -u` in 
-  0) PS1="${PROMPT}# ";; # root
-  *) PS1="${PROMPT}%{$fg[white]%}${PS_ARROW}%{$reset_color%} ";; # mortals
+  0) PS1="${PROMPT}${SSH_COLOR}#%{$reset_color%} ";; # root
+  *) PS1="${PROMPT}${SSH_COLOR}${PS_ARROW}%{$reset_color%} ";; # mortals
 esac
 
 # vi mode indicator
