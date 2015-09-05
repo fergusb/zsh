@@ -20,7 +20,7 @@ else
 fi
 
 # prompt
-PROMPT="[%{$fg[blue]%}%n@%m:%~%{$reset_color%}]$PS2
+PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}$PS2
  "
 
 case `id -u` in 
