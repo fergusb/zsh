@@ -17,7 +17,7 @@ PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}$PS2
  "
 case `id -u` in 
   0) PS1="${PROMPT}# ";; # root
-  *) PS1="${PROMPT}%{$fg[white]%}${PS_CHAR}%{$reset_color%} ";; # mortals
+  *) PS1="${PROMPT}%{$fg[white]%}${PS_ARROW}%{$reset_color%} ";; # mortals
 esac
 
 # vi mode indicator
