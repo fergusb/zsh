@@ -23,11 +23,6 @@ for var in LANG LC_ALL LC_MESSAGES ; do
   [[ -n ${(P)var} ]] && export $var
 done
 
-# ruby env
-if [ -d $HOME/.rbenv ] ; then
-  eval "$(rbenv init -)"
-fi
-
 # color setup for ls
 if [[ $(uname) == 'Darwin' ]]; then # we're on OS X
   # export LSCOLORS="Gxfxcxdxbxegedabagacad"
@@ -167,6 +162,11 @@ if [[ -n "$commands[virtualenvwrapper.sh]" ]]; then
     mkdir -p $WORKON_HOME
   fi
   source $VIRTUALENVWRAPPER_SCRIPT
+fi
+
+# ruby env
+if [ -d $HOME/.rbenv ] ; then
+  eval "$(rbenv init -)"
 fi
 
 # load custom goodness
