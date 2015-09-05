@@ -30,15 +30,15 @@ fi
 
 # color setup for ls
 if [[ $(uname) == 'Darwin' ]]; then # we're on OS X
-  export LSCOLORS="Gxfxcxdxbxegedabagacad"
+  # export LSCOLORS="Gxfxcxdxbxegedabagacad"
   LS_FLAGS='-G'
   export CLICOLOR=1
-  PS_CARAT='➜'
+  PS_CHAR='➜'
 else # we're on Linux 
   LS_FLAGS='--color=auto'
   eval $(dircolors -b)
   export TERM=xterm-256color
-  PS_CARAT='>'
+  PS_CHAR='>'
 fi
 
 export COLORFGBG="default;default" # for mutt & vim
