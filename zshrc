@@ -28,15 +28,13 @@ if [[ $(uname) == 'Darwin' ]]; then # we're on OS X
   # export LSCOLORS="Gxfxcxdxbxegedabagacad"
   LS_FLAGS='-G'
   export CLICOLOR=1
-  # PS_ARROW='➜'
-  PS_ARROW='❯'
+  PS_ARROW=' ➜ '
+  # PS_ARROW='❯ '
 else # we're on Linux 
   LS_FLAGS='--color=auto'
   eval $(dircolors -b)
   export TERM=xterm-256color
-  # PS_ARROW='➜'
-  # PS_ARROW='>'
-  PS_ARROW='❯'
+  PS_ARROW=' > '
 fi
 
 export COLORFGBG="default;default" # for mutt & vim

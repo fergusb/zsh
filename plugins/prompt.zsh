@@ -21,11 +21,11 @@ fi
 
 # prompt
 PROMPT="%{$fg[blue]%}[%n@%m:%~]%{$reset_color%}$PS2
- "
+"
 
 case `id -u` in 
-  0) PS1="${PROMPT}${SSH_COLOR}#%{$reset_color%} ";; # root
-  *) PS1="${PROMPT}${SSH_COLOR}${PS_ARROW}%{$reset_color%} ";; # mortals
+  0) PS1="${PROMPT}${SSH_COLOR}#%{$reset_color%}";; # root
+  *) PS1="${PROMPT}${SSH_COLOR}${PS_ARROW}%{$reset_color%}";; # mortals
 esac
 
 # vi mode indicator
