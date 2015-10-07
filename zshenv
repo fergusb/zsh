@@ -1,5 +1,12 @@
 #!/usr/bin/env zsh
 
+# re-use ssh-agent and/or gpg-agent between logins
+[[ -f $(which keychain 2> /dev/null)  ]] && \
+  keychain -q --nogui $HOME/.ssh/id_rsa
+
+[[ -f $HOME/.keychain/$HOST-sh  ]] && \
+  source $HOME/.keychain/$HOST-sh
+
 # reliable SSH authentication socket location
 SOCK="/tmp/ssh-agent-$USER-env"
 if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
