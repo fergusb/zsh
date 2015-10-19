@@ -187,6 +187,4 @@ fi
 # load & init completions last
 autoload -Uz compinit && compinit
 
-#date +"%F"
-
 # vim:ft=zsh

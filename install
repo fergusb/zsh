@@ -2,7 +2,7 @@
 
 CWD=$(pwd) 
 DATE=$(date +"%Y%m%d%H%M")
-files=(zlogout zshrc zshenv)
+files=(zlogin zlogout zshrc zshenv)
 
 # clear old symlink or backup old zsh dir, if it exists
 if [ -h $HOME/.zsh ] ; then
