@@ -1,9 +1,10 @@
 #!/usr/bin/env zsh
 
-# clear the keychain
-keychain --clear
+# clear keychain
+# [[ -f $(which keychain 2> /dev/null)  ]] && \
+  # keychain --clear
 
-# when leaving the console clear the screen to increase privacy
+# clear screen on exit
 if [ "$SHLVL" = 1 ]; then
-    [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
+  [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
 fi
