@@ -58,7 +58,7 @@ alias ifconfig='/sbin/ifconfig'
 alias path='echo -e ${PATH//:/\\n}'
 alias rl='rlogin'
 # alias server_name='ssh -v -l USERNAME IP ADDRESS'
-alias which='which -a'
+# alias which='which -a'
 
 # tmux
 alias tma='tmux attach -d -t'
