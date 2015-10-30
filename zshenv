@@ -47,7 +47,7 @@ export HISTSIZE=5000
 export SAVEHIST=$HISTSIZE
 
 # directory stack
-export DIRSTACKSIZE=9
+export DIRSTACKSIZE=10
 
 # vim goodness
 export EDITOR=vim
