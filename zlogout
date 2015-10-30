@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 # clear keychain
-[[ -f $(which keychain 2> /dev/null)  ]] && \
-  keychain --clear
+# [[ -f $(which keychain 2> /dev/null)  ]] && \
+  # keychain -q --clear
 
 # clear screen on exit
 if [ "$SHLVL" = 1 ]; then
