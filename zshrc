@@ -35,6 +35,7 @@ else # we're on Linux
   eval $(dircolors -b)
   export TERM=xterm-256color
   PS_ARROW=' > '
+  # export TERMINAL="urxvt";
 fi
 
 export COLORFGBG="default;default" # for mutt & vim
