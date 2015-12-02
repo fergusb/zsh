@@ -35,7 +35,7 @@ else # we're on Linux
   eval $(dircolors -b)
   export TERM=xterm-256color
   PS_ARROW=' > '
-  # export TERMINAL="urxvt";
+  # export TERM="urxvt";
 fi
 
 export COLORFGBG="default;default" # for mutt & vim
@@ -44,7 +44,7 @@ export COLORFGBG="default;default" # for mutt & vim
  
 # huge history
 export HISTFILE=$HOME/.zsh/history
-export HISTSIZE=5000
+export HISTSIZE=999
 export SAVEHIST=$HISTSIZE
 
 # directory stack
