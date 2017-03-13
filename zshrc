@@ -9,6 +9,7 @@ if [ -d $HOME/bin ] ; then
   export PATH=$HOME/bin:$PATH
 fi
 
+export PATH=$HOME/.local/bin:$PATH
 export PATH=/usr/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
@@ -150,10 +151,12 @@ bindkey "^[m" copy-prev-shell-word
 setopt long_list_jobs
 
 # python virtualenv(s)
-if [[ -n "$commands[virtualenvwrapper.sh]" ]]; then
+# if [[ -n "$commands[virtualenvwrapper.sh]" ]]; then
+if [ -d $HOME/.virtualenvs ] ; then
   export WORKON_HOME=$HOME/.virtualenvs
   export PROJECT_HOME=$HOME/Projects
-  export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+  export VIRTUALENVWRAPPER_SCRIPT=$HOME/.local/bin/virtualenvwrapper.sh
+  # export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
   if [ ! -d "$WORKON_HOME" ] ; then
     mkdir -p $WORKON_HOME
   fi
