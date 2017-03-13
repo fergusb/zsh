@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: UTF-8 -*-
 
 from __future__ import print_function
@@ -17,7 +17,7 @@ error_string = error.decode('utf-8')
 if 'fatal: Not a git repository' in error_string:
     sys.exit(0)
 
-branch = branch.strip()[11:]
+branch = branch.strip().decode('utf-8')[11:]
 
 res, err = Popen(
     ['git', 'diff', '--name-status'],
