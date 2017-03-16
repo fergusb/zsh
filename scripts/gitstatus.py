@@ -7,10 +7,8 @@ import sys
 
 symbols = {'ahead of': '↑', 'behind': '↓', 'prehash': ':'}
 
-git_sym = Popen(
-    ['git', 'symbolic-ref', 'HEAD'],
-    stdout=PIPE, stderr=PIPE)
-branch, error = git_sym.communicate()
+gitsym = Popen(['git', 'symbolic-ref', 'HEAD'], stdout=PIPE, stderr=PIPE)
+branch, error = gitsym.communicate()
 
 error_string = error.decode('utf-8')
 
@@ -33,13 +31,9 @@ staged_files = [namestat[0] for namestat in Popen(
     stdout=PIPE).communicate()[0].splitlines()]
 
 nb_changed = len(changed_files) - changed_files.count('U')
-
 nb_U = staged_files.count('U')
-
 nb_staged = len(staged_files) - nb_U
-
 staged = str(nb_staged)
-
 conflicts = str(nb_U)
 changed = str(nb_changed)
 
