@@ -9,7 +9,7 @@
     # export SSH_AUTH_SOCK=$SOCK
 # fi
 
-# fish shell like syntax highlighting
+# fish shell like syntax highlighting - sorta
 if [[ -d $HOME/.zsh/extras/zsh-syntax-highlighting ]]; then
   export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOME/.zsh/extras/zsh-syntax-highlighting/highlighters
 fi
