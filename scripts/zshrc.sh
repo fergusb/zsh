@@ -1,10 +1,9 @@
-#!/usr/bin/env zsh
+# To install source this file from your .zshrc file
 
 # see documentation at http://linux.die.net/man/1/zshexpn
 # A: finds the absolute path, even if this is symlinked
 # h: equivalent to dirname
-# export __GIT_PROMPT_DIR=${0:A:h}
-export __GIT_PROMPT_DIR=~/.zsh/scripts
+export __GIT_PROMPT_DIR=${0:A:h}
 
 export GIT_PROMPT_EXECUTABLE=${GIT_PROMPT_EXECUTABLE:-"python"}
 
@@ -66,14 +65,13 @@ git_super_status() {
 	precmd_update_git_vars
     if [ -n "$__CURRENT_GIT_STATUS" ]; then
 	  STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}"
-	  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
 	  if [ "$GIT_BEHIND" -ne "0" ]; then
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{${reset_color}%}"
 	  fi
 	  if [ "$GIT_AHEAD" -ne "0" ]; then
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD%{${reset_color}%}"
 	  fi
-		# STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
+	  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
 	  if [ "$GIT_STAGED" -ne "0" ]; then
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
 	  fi
@@ -95,27 +93,16 @@ git_super_status() {
 }
 
 # Default values for the appearance of the prompt. Configure at will.
-# ZSH_THEME_GIT_PROMPT_PREFIX="["
-# ZSH_THEME_GIT_PROMPT_SUFFIX="]"
-# ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
-# ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[yellow]%}"
-# ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{•%G%}"
-# ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{✖%G%}"
-# ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[magenta]%}%{✚%G%}"
-# ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%G%}"
-# ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%G%}"
-# ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
-# ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
-
-
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="]"
 ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}+"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}-"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[magenta]%}+"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{+%G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{×%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[magenta]%}%{+%G%}"
 ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[blue]↓%G%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[blue]↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{•%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
+
+

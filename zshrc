@@ -150,6 +150,9 @@ bindkey "^[m" copy-prev-shell-word
 # jobs
 setopt long_list_jobs
 
+# git prompt
+source $HOME/.zsh/scripts/zshrc.sh
+
 # python virtualenv(s)
 # if [[ -n "$commands[virtualenvwrapper.sh]" ]]; then
 if [ -d $HOME/.virtualenvs ] ; then
