@@ -56,8 +56,9 @@ export PAGER="less"
 export LESS="-R"
 
 # vim goodness
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
+export GIT_EDITOR=nvim
 
 # integrate vim goodness
 bindkey -v 
