@@ -94,6 +94,12 @@ symlink() {
   fi
 }
 
+# pet - register previous command
+function prev() {
+  PREV=$(fc -lrn | head -n 1)
+  sh -c "pet new `printf %q "$PREV"`"
+}
+
 # Translate DE<=>EN
 # 'translate' looks up fot a word in a file with language-to-language
 # translations (field separator should be " : "). A typical wordlist looks
