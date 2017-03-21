@@ -1,8 +1,8 @@
 # !/usr/bin/env zsh
 
 # ~/.zshrc - zsh config file
-# From: Fergus Bremner
 # Email: <fergus.bremner@gmail.com>
+# Last Modified: 2017-03-21 08:28:49 CET
  
 # set PATH so it includes user bin (if it exists)
 if [ -d $HOME/bin ] ; then
@@ -55,10 +55,16 @@ export DIRSTACKSIZE=10
 export PAGER="less"
 export LESS="-R"
 
-# vim goodness
-export EDITOR=nvim
-export VISUAL=nvim
-export GIT_EDITOR=nvim
+# neovim or vim
+if [[ -n "$commands[nvim]" ]]; then
+  export EDITOR=nvim
+  export VISUAL=nvim
+  export GIT_EDITOR=nvim
+else
+  export EDITOR=vim
+  export VISUAL=vim
+  export GIT_EDITOR=vim
+fi
 
 # integrate vim goodness
 bindkey -v 

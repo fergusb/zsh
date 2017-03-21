@@ -100,6 +100,15 @@ function prev() {
   sh -c "pet new `printf %q "$PREV"`"
 }
 
+# pet - search snippets and output on the shell
+function pet-select() {
+  BUFFER=$(pet search --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle redisplay
+}
+zle -N pet-select
+bindkey '^s' pet-select
+
 # Translate DE<=>EN
 # 'translate' looks up fot a word in a file with language-to-language
 # translations (field separator should be " : "). A typical wordlist looks
