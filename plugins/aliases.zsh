@@ -27,20 +27,21 @@ alias zshrc='vim ~/.zshrc' # Quick access to the ~/.zshrc file
 
 # corrections
 alias ack='nocorrect ack'
+alias ag='nocorrect ag'
 alias aws='nocorrect aws'
 alias cp='nocorrect cp'
 alias git='nocorrect git'
 alias mail='nocorrect mail'
 alias man='nocorrect man'
 alias mkdir='nocorrect mkdir'
-alias mutt='cd ~/ && nocorrect mutt'
+alias mutt='cd && nocorrect mutt' # start mutt from $HOME
 alias newsbeuter='nocorrect newsbeuter'
 alias mv='nocorrect mv'
 alias mux='nocorrect mux'
 alias mysql='nocorrect mysql'
 alias nvim='nocorrect nvim'
 alias offlineimap='nocorrect offlineimap'
-alias pip='nocorrect pip'
+# alias pip='nocorrect pip'
 alias ssh='nocorrect ssh'
 alias vi='nocorrect vim'
 alias vim='nocorrect vim'
@@ -53,8 +54,8 @@ alias chx='chmod +x'
 alias cwd='echo $cwd'
 alias df='df -kh'
 alias du='du -h'
-alias h='history'
-alias ifconfig='/sbin/ifconfig'
+# alias h='history'
+# alias ifconfig='/sbin/ifconfig'
 #alias killall='sudo killall'
 alias path='echo -e ${PATH//:/\\n}'
 alias rl='rlogin'
@@ -84,7 +85,10 @@ alias nvi='nvim'
 alias randline="/usr/bin/rl"
 alias tidy='tidy -config $HOME/.tidy.conf'
 alias tree='tree -C'
-alias vi='vim'
+# alias vi='vim'
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi
 
 if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
   alias ql='qlmanage -p 2>/dev/null' # OS X Quick Look
@@ -99,7 +103,7 @@ fi
 
 if [[ $(uname) == 'Linux' ]]; then # if we're on penguin power
   alias open='xdg-open'
-  alias gvim='UBUNTU_MENUPROXY= gvim'
+  # alias gvim='UBUNTU_MENUPROXY= gvim'
   alias suspend='sudo pm-suspend'
   alias updatedb='sudo updatedb'
 fi

@@ -193,4 +193,8 @@ fi
 # load & init completions last
 autoload -Uz compinit && compinit
 
+if [[ $(uname) == 'Darwin' ]]; then
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+fi
+
 # vim:ft=zsh
