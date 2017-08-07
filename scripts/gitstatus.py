@@ -13,33 +13,34 @@ branch, error = gitsym.communicate()
 error_string = error.decode('utf-8')
 
 if 'fatal: Not a git repository' in error_string:
-	sys.exit(0)
+    sys.exit(0)
 
 branch = branch.decode("utf-8").strip()[11:]
 
-res, err = Popen(['git','diff','--name-status'], stdout=PIPE, stderr=PIPE).communicate()
+res, err = Popen(['git', 'diff', '--name-status'], stdout=PIPE, stderr=PIPE).communicate()
 err_string = err.decode('utf-8')
 if 'fatal' in err_string:
-	sys.exit(0)
+    sys.exit(0)
 changed_files = [namestat[0] for namestat in res.decode("utf-8").splitlines()]
-staged_files = [namestat[0] for namestat in Popen(['git','diff', '--staged','--name-status'], stdout=PIPE).communicate()[0].splitlines()]
+staged_files = [namestat[0] for namestat in Popen(['git', 'diff', '--staged', '--name-status'], stdout=PIPE).communicate()[0].splitlines()]
 nb_changed = len(changed_files) - changed_files.count('U')
 nb_U = staged_files.count('U')
 nb_staged = len(staged_files) - nb_U
 staged = str(nb_staged)
 conflicts = str(nb_U)
 changed = str(nb_changed)
-nb_untracked = len([0 for status in Popen(['git','status','--porcelain',],stdout=PIPE).communicate()[0].decode("utf-8").splitlines() if status.startswith('??')])
+nb_untracked = len([0 for status in Popen(['git', 'status', '--porcelain', ], stdout=PIPE).communicate()[0].decode("utf-8").splitlines() if status.startswith('??')])
 untracked = str(nb_untracked)
+stashed = ""
 
-ahead, behind = 0,0
+ahead, behind = 0, 0
 
-if not branch: # not on any branch
-	branch = prehash + Popen(['git','rev-parse','--short','HEAD'], stdout=PIPE).communicate()[0].decode("utf-8")[:-1]
+if not branch:   # not on any branch
+    branch = prehash + Popen(['git', 'rev-parse', '--short', 'HEAD'], stdout=PIPE).communicate()[0].decode("utf-8")[:-1]
 else:
-	remote_name = Popen(['git','config','branch.%s.remote' % branch], stdout=PIPE).communicate()[0].decode("utf-8").strip()
+	remote_name = Popen(['git', 'config', 'branch.%s.remote' % branch], stdout=PIPE).communicate()[0].decode("utf-8").strip()
 	if remote_name:
-		merge_name = Popen(['git','config','branch.%s.merge' % branch], stdout=PIPE).communicate()[0].decode("utf-8").strip()
+		merge_name = Popen(['git', 'config', 'branch.%s.merge' % branch], stdout=PIPE).communicate()[0].decode("utf-8").strip()
 		if remote_name == '.': # local
 			remote_ref = merge_name
 		else:
@@ -60,6 +61,7 @@ out = ' '.join([
 	conflicts,
 	changed,
 	untracked,
+	untracked,
+    stashed,
 	])
 print(out, end='')
-
