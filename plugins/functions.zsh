@@ -107,6 +107,7 @@ function pet-select() {
   zle redisplay
 }
 zle -N pet-select
+stty -ixon
 bindkey '^s' pet-select
 
 # Translate DE<=>EN
@@ -119,30 +120,30 @@ bindkey '^s' pet-select
 #  $ awk -F ':' '{ print $2" : "$1" "$3 }' \
 #    /usr/local/lib/words/en-de.ISO-8859-1.vok > ~/.translate/de-en.ISO-8859-1.vok
 #f5# Translates a word
-trans() {
-    emulate -L zsh
-    case "$1" in
-        -[dD]*)
-            translate -l de-en $2
-            ;;
-        -[eE]*)
-            translate -l en-de $2
-            ;;
-        *)
-            echo "Usage: $0 { -D | -E }"
-            echo "         -D == German to English"
-            echo "         -E == English to German"
-    esac
-}
+# trans() {
+    # emulate -L zsh
+    # case "$1" in
+        # -[dD]*)
+            # translate -l de-en $2
+            # ;;
+        # -[eE]*)
+            # translate -l en-de $2
+            # ;;
+        # *)
+            # echo "Usage: $0 { -D | -E }"
+            # echo "         -D == German to English"
+            # echo "         -E == English to German"
+    # esac
+# }
 
-if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
-  function vol() {
-    if [[ -n $1 ]]; then 
-      osascript -e "set volume output volume $1"
-    else
-      osascript -e "output volume of (get volume settings)"
-    fi
-  } 
-fi
+# if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
+  # function vol() {
+    # if [[ -n $1 ]]; then 
+      # osascript -e "set volume output volume $1"
+    # else
+      # osascript -e "output volume of (get volume settings)"
+    # fi
+  # } 
+# fi
 
 # vim:ft=zsh

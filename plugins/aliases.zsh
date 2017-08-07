@@ -79,15 +79,14 @@ alias grep='grep --colour=auto'
 #alias gvim='gvim -p --remote-tab-silent'
 alias escputil='sudo escputil'
 alias inklevel='escputil -iqur /dev/usb/lp0'
-alias nv='nvim'
-alias nvi='nvim'
 #alias python='python3'
 alias randline="/usr/bin/rl"
 alias tidy='tidy -config $HOME/.tidy.conf'
-alias tree='tree -C'
+#alias tree='tree -C'
+alias tv='terminal_velocity'
 # alias vi='vim'
 if type nvim > /dev/null 2>&1; then
-  alias vim='nvim'
+  alias nvim='nvim'
 fi
 
 if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
