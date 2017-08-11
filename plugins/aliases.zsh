@@ -86,7 +86,7 @@ alias tidy='tidy -config $HOME/.tidy.conf'
 alias tv='terminal_velocity'
 # alias vi='vim'
 if type nvim > /dev/null 2>&1; then
-  alias nvim='nvim'
+  alias vim='nvim'
 fi
 
 if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
