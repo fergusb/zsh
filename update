@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+git submodule foreach git pull origin master
+wait
+git submodule update --init --recursive
+wait
+printf "All done!\n"
