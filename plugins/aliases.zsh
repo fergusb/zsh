@@ -34,7 +34,7 @@ alias git='nocorrect git'
 alias mail='nocorrect mail'
 alias man='nocorrect man'
 alias mkdir='nocorrect mkdir'
-alias mutt='cd && nocorrect mutt' # start mutt from $HOME
+alias mutt='cd && nocorrect neomutt' # start neomutt from $HOME
 alias newsbeuter='nocorrect newsbeuter'
 alias mv='nocorrect mv'
 alias mux='nocorrect mux'
@@ -86,7 +86,7 @@ alias tidy='tidy -config $HOME/.tidy.conf'
 alias tv='terminal_velocity'
 # alias vi='vim'
 if type nvim > /dev/null 2>&1; then
-  alias vim='nvim'
+  # alias vim='nvim'
 fi
 
 if [[ $(uname) == 'Darwin' ]]; then # if we're on OS X
